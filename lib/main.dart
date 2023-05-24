@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:suudai/components/drawer.dart';
-import 'package:suudai/pages/indeticarPagina.dart';
+import 'package:suudai/pages/machine%20learning/indeticarPagina.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,6 +32,9 @@ class MyApp extends StatelessWidget {
 }
 
 class Inicio extends StatelessWidget {
+  ImagePicker? picker;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -263,12 +266,23 @@ class Inicio extends StatelessWidget {
     );
   }
 
-  void abrirCamara(BuildContext context) async {
-    final picker = ImagePicker();
-    final picture = await picker.pickImage(source: ImageSource.camera);
-    File imageFile = File(picture!.path);
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-      return Identificar();
-    }));
+  Future<void> abrirCamara(BuildContext context) async {
+    picker = ImagePicker();
+    final picture = await picker?.pickImage(source: ImageSource.camera);
+
+    if (picture != null) {
+      final imageFile = File(picture.path);
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (BuildContext context) => Identificar(imagen: imageFile),
+        ),
+      );
+    } else {
+      // Manejar el caso en el que no se seleccionó ninguna imagen
+      // o se canceló la selección
+      print('No se seleccionó ninguna imagen');
+    }
   }
 }
