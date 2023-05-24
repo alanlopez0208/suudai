@@ -64,7 +64,18 @@ class IdentificarPagina extends State<Identificar> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Image.file(imagenArchivo),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                  width: double.infinity,
+                  height: 200,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.file(imagenArchivo,
+                    fit: BoxFit.cover,),
+                  ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
