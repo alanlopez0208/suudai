@@ -34,7 +34,6 @@ class MyApp extends StatelessWidget {
 class Inicio extends StatelessWidget {
   ImagePicker? picker;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,217 +50,236 @@ class Inicio extends StatelessWidget {
       drawer: MenuHamburgesa(),
       body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: GridView.count(
-            crossAxisCount: 2, // Número de columnas en la cuadrícula
-            children: <Widget>[
-              Card(
-                clipBehavior: Clip.antiAlias,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: InkWell(
-                  splashColor: Colors.blue.withAlpha(30),
-                  onTap: () {
-                    abrirCamara(context);
-                  },
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Ink.image(
-                          image: AssetImage("assets/A13.jpg"),
-                          width: 200,
-                          height: 300,
-                          fit: BoxFit.cover),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.green.withOpacity(0.7),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Text(
-                                  'Identificar',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 24,
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Card(
+                        clipBehavior: Clip.antiAlias,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: InkWell(
+                          splashColor: Colors.blue.withAlpha(30),
+                          onTap: () {
+                            abrirCamara(context);
+                          },
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Ink.image(
+                                  image: AssetImage("images/A13.jpg"),
+                                  width: MediaQuery.of(context).size.width/2,
+                                  height: 300,
+                                  fit: BoxFit.cover),
+                              Positioned(
+                                bottom: 0,
+                                right: 0,
+                                left: 0,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.green.withOpacity(0.7),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Text(
+                                          'Identificar',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontSize: 24,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.add_a_photo,
+                                          size: 35,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                Icon(
-                                  Icons.add_a_photo,
-                                  size: 35,
-                                )
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              Card(
-                clipBehavior: Clip.antiAlias,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: InkWell(
-                  splashColor: Colors.blue.withAlpha(30),
-                  onTap: () {
-                    debugPrint('Card tapped.');
-                  },
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Ink.image(
-                          image: AssetImage("assets/ajolote.jpg"),
-                          width: 200,
-                          height: 300,
-                          fit: BoxFit.cover),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.green.withOpacity(0.7),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Text(
-                                  'Escanear',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 24,
+                    ),
+                    Expanded(
+                      child: Card(
+                        clipBehavior: Clip.antiAlias,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: InkWell(
+                          splashColor: Colors.blue.withAlpha(30),
+                          onTap: () {
+                            debugPrint('Card tapped.');
+                          },
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Ink.image(
+                                  image: AssetImage("images/ajolote.jpg"),
+                                  width: 200,
+                                  height: 300,
+                                  fit: BoxFit.cover),
+                              Positioned(
+                                bottom: 0,
+                                right: 0,
+                                left: 0,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.green.withOpacity(0.7),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Text(
+                                          'Escanear',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontSize: 24,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.qr_code_2,
+                                          size: 30,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                Icon(
-                                  Icons.qr_code_2,
-                                  size: 30,
-                                )
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
-              ),
-              Card(
-                clipBehavior: Clip.antiAlias,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: InkWell(
-                  splashColor: Colors.blue.withAlpha(30),
-                  onTap: () {
-                    debugPrint('Card tapped.');
-                  },
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Ink.image(
-                          image: AssetImage("assets/GS3.jpg"),
-                          width: 200,
-                          height: 300,
-                          fit: BoxFit.cover),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.green.withOpacity(0.7),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                right: 10, left: 10, bottom: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Text(
-                                  'Descubrir',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 24,
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Card(
+                        clipBehavior: Clip.antiAlias,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: InkWell(
+                          splashColor: Colors.blue.withAlpha(30),
+                          onTap: () {
+                            debugPrint('Card tapped.');
+                          },
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Ink.image(
+                                  image: AssetImage("images/GS3.jpg"),
+                                  width: 200,
+                                  height: 300,
+                                  fit: BoxFit.cover),
+                              Positioned(
+                                bottom: 0,
+                                right: 0,
+                                left: 0,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.green.withOpacity(0.7),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Text(
+                                          'Descubrir',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontSize: 24,
+                                          ),
+                                        ),
+                                        Icon(Icons.map, size: 35)
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                Icon(Icons.map, size: 35)
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              Card(
-                clipBehavior: Clip.antiAlias,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: InkWell(
-                  splashColor: Colors.blue.withAlpha(30),
-                  onTap: () {
-                    debugPrint('Card tapped.');
-                  },
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Ink.image(
-                          image: AssetImage("assets/LM13.png"),
-                          width: 400,
-                          height: 700,
-                          fit: BoxFit.cover),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        left: 0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.green.withOpacity(0.7),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                right: 10, left: 10, bottom: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Text(
-                                  'Historial',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 24,
+                    ),
+                    Expanded(
+                      child: Card(
+                        clipBehavior: Clip.antiAlias,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: InkWell(
+                          splashColor: Colors.blue.withAlpha(30),
+                          onTap: () {
+                            debugPrint('Card tapped.');
+                          },
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Ink.image(
+                                  image: AssetImage("images/LM13.png"),
+                                  width: 200,
+                                  height: 300,
+                                  fit: BoxFit.cover),
+                              Positioned(
+                                bottom: 0,
+                                right: 0,
+                                left: 0,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.green.withOpacity(0.7),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Text(
+                                          'Historial',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontSize: 24,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.timer,
+                                          size: 35,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                Icon(
-                                  Icons.timer,
-                                  size: 35,
-                                )
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+                    ),
+                  ],
+                )
+              ],
+            ),
           )),
     );
   }

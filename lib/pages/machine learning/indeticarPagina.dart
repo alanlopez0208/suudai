@@ -8,7 +8,7 @@ import 'package:suudai/pages/machine%20learning/classifier.dart';
 import 'package:suudai/pages/machine%20learning/classifier_quant.dart';
 import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 
-class Identificar extends StatefulWidget{
+class Identificar extends StatefulWidget {
   final File imagen;
 
   Identificar({required this.imagen});
@@ -17,7 +17,6 @@ class Identificar extends StatefulWidget{
   State<StatefulWidget> createState() {
     return IdentificarPagina();
   }
-
 }
 
 class IdentificarPagina extends State<Identificar> {
@@ -35,13 +34,12 @@ class IdentificarPagina extends State<Identificar> {
     _predict();
   }
 
-
   void _predict() async {
     Imagen.Image? img = Imagen.decodeImage(widget.imagen.readAsBytesSync());
     var pred = _clasificador.predict(img!);
 
     setState(() {
-      this.category  = pred;
+      this.category = pred;
     });
   }
 
@@ -60,36 +58,103 @@ class IdentificarPagina extends State<Identificar> {
           title: Text("Suudai’")),
       drawer: MenuHamburgesa(),
       body: SingleChildScrollView(
-        child: Center(child: Column(
+        child: Container(
+            child: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10)
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                  width: double.infinity,
-                  height: 200,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.file(imagenArchivo,
-                    fit: BoxFit.cover,),
+                width: double.infinity,
+                height: 200,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: Image.file(
+                    imagenArchivo,
+                    fit: BoxFit.cover,
                   ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 15, left: 10, right: 10, bottom: 20),
+              child: Center(
+                child: Text(
+                  "Probabilidad",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 2.0),
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text("Este es un alacran Uy Pican Muy fuerte"),
+              child: Container(
+                decoration: BoxDecoration(
+                  color:  Color(0xFF6AA83D).withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+                  title: Text("Nombre Cientifico:"),
+                  subtitle: Text(
+                    "Lobus Mexicanos",
+                    style: TextStyle(fontSize: 30),
+                  ),
+
+                ),
+              ),
             ),
-            Text(
-                category != null ? category!.label:'No se dectecto Ninguna Categoria'
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+                  title: Text("Familia:"),
+                  subtitle: Text(
+                    "Durango querido",
+                    style: TextStyle(fontSize: 30),
+                  ),
+
+                ),
+              ),
             ),
-            SizedBox(
-              height: 8,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+                  title: Text("Alimentacion"),
+                  subtitle: Text(
+                      "Carne",
+                    style: TextStyle(fontSize: 30),
+                  ),
+
+                ),
+              ),
             ),
-            Text(
-                category!=null
-                    ?'Nivel de confianza:${(category!.score).toStringAsFixed(3)}':'No se dectecto Ninguna Categoria'
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListTile(
+                  title: Text("Depredadores:"),
+                  subtitle: Text(
+                    "Ajales",
+                    style: TextStyle(fontSize: 30),
+                  ),
+
+                ),
+              ),
             ),
           ],
         )),

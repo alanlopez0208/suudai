@@ -16,7 +16,7 @@ class MenuHamburgesa extends StatelessWidget{
           children: <Widget> [
             Container(
               height: 200,
-              child: Image.asset("assets/Logo.png", fit: BoxFit.cover),
+              child: Image.asset("images/Logo.png", fit: BoxFit.cover),
             ),
             ListTile(
               title: Text("Inicio"),
