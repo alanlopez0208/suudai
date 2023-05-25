@@ -36,11 +36,15 @@ class IdentificarPagina extends State<Identificar> {
 
   void _predict() async {
     Imagen.Image? img = Imagen.decodeImage(widget.imagen.readAsBytesSync());
+    if(img != null){
+      print("--------->Si hay algo que analizar");
+    }
     var pred = _clasificador.predict(img!);
 
     setState(() {
       this.category = pred;
     });
+
   }
 
 
@@ -85,7 +89,13 @@ class IdentificarPagina extends State<Identificar> {
                   top: 15, left: 10, right: 10, bottom: 20),
               child: Center(
                 child: Text(
-                  "Probabilidad",
+                  "Animal : ${
+                    category != null ? category!.label
+                    : "Nulo"
+                  } Probabilidad : ${
+                      category != null ? category!.score
+                          : "Nulo"
+                  }",
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
