@@ -52,7 +52,7 @@ class Tarjeta extends StatelessWidget{
                           ),
                         ),
                         Icon(
-                          Icons.takeout_dining,
+                          Icons.add_a_photo,
                           size: 345,
                         )
                       ],
