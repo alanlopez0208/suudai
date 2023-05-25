@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
 }
 
 class Inicio extends StatelessWidget {
-  ImagePicker? picker;
+  ImagePicker picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
@@ -288,14 +288,19 @@ class Inicio extends StatelessWidget {
   void toScanners(BuildContext context){
     Navigator.push(context, MaterialPageRoute(builder: (context) => QRScanner()));
   }
+  void abrirCamara(BuildContext context) async {
+    final picture = await picker.pickImage(source: ImageSource.camera);
+    _procesarImagenSeleccionada(context, picture);
+  }
 
-  Future<void> abrirCamara(BuildContext context) async {
-    picker = ImagePicker();
-    final picture = await picker?.pickImage(source: ImageSource.camera);
+  void abrirGaleria(BuildContext context) async {
+    final picture = await picker.pickImage(source: ImageSource.gallery);
+    _procesarImagenSeleccionada(context, picture);
+  }
 
+  void _procesarImagenSeleccionada(BuildContext context, picture) {
     if (picture != null) {
       final imageFile = File(picture.path);
-
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -303,9 +308,48 @@ class Inicio extends StatelessWidget {
         ),
       );
     } else {
-      // Manejar el caso en el que no se seleccionó ninguna imagen
-      // o se canceló la selección
-      print('No se seleccionó ninguna imagen');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('No se seleccionó ninguna imagen'),
+        ),
+      );
     }
+  }
+
+  Future<void> showAlertDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Selecciona "),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    abrirGaleria(context);
+                  },
+                  child: Text("Galeria"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    abrirCamara(context);
+                  },
+                  child: Text("Galeria"),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: Text('Cerrar'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Cierra el diálogo
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
