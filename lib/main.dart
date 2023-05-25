@@ -65,7 +65,7 @@ class Inicio extends StatelessWidget {
                         child: InkWell(
                           splashColor: Colors.blue.withAlpha(30),
                           onTap: () {
-                            abrirCamara(context);
+                            showAlertDialog(context);
                           },
                           child: Stack(
                             alignment: Alignment.center,

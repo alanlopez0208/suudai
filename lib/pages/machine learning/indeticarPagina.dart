@@ -11,6 +11,7 @@ import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 class Identificar extends StatefulWidget {
   final File imagen;
 
+
   Identificar({required this.imagen});
 
   @override
