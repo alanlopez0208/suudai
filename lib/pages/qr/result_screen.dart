@@ -40,7 +40,8 @@ class ResultScreen extends StatelessWidget{
               target,
               style: TextStyle(
                 fontSize: 13,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.normal,
+
               ),
             )
           ],
@@ -97,23 +98,26 @@ class ResultScreen extends StatelessWidget{
 
 
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      getProName(code),
-                      style: TextStyle(
-                        fontSize: 33,
-                        fontWeight: FontWeight.bold,
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        getProName(code),
+                        style: TextStyle(
+                          fontSize: 33,
+                          fontWeight: FontWeight.bold,
+                          //backgroundColor: Color(0xFF6AA83D),
+                        ),
                       ),
-                    ),
 
-                    QrImageView(
-                      data: code,
-                      size: 50,
-                      version: QrVersions.auto,
-                    ),
-                  ],
+                      QrImageView(
+                        data: code,
+                        size: 50,
+                        version: QrVersions.auto,
+                      ),
+                    ],
+                  ),color: Color(0xFF6AA83D),
                 ),
                 getProDes(),
               ],
