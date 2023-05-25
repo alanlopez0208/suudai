@@ -30,6 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  mobile_scanner: ^2.1.0
+  qr_flutter: ^4.0.0
   image_picker: ^0.8.6+1
   flutter_lints: ^2.0.0
   tflite_flutter: ^0.9.0

@@ -49,7 +49,7 @@ class MenuHamburgesa extends StatelessWidget{
               },
             ),
             ListTile(
-              title: Text("Descubrir"),
+              title: Text("Eventos"),
               leading: Icon(Icons.map,color: Colors.black,),
               onTap: (){
                 Navigator.push(context, MaterialPageRoute
@@ -59,7 +59,7 @@ class MenuHamburgesa extends StatelessWidget{
               },
             ),
             ListTile(
-              title: Text("Eventos"),
+              title: Text("Historial"),
               leading: Icon(Icons.calendar_month,color: Colors.black,),
               onTap: (){
                 Navigator.push(context, MaterialPageRoute

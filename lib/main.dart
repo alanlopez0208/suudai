@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:suudai/components/drawer.dart';
 import 'package:suudai/pages/machine%20learning/indeticarPagina.dart';
+import 'package:suudai/pages/qr/qr_scanner.dart';
 
 void main() {
   runApp(MyApp());
@@ -119,7 +120,7 @@ class Inicio extends StatelessWidget {
                         child: InkWell(
                           splashColor: Colors.blue.withAlpha(30),
                           onTap: () {
-                            debugPrint('Card tapped.');
+                            toScanners(context);
                           },
                           child: Stack(
                             alignment: Alignment.center,
@@ -203,7 +204,7 @@ class Inicio extends StatelessWidget {
                                           MainAxisAlignment.spaceEvenly,
                                       children: <Widget>[
                                         Text(
-                                          'Descubrir',
+                                          'Eventos',
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white,
@@ -282,6 +283,10 @@ class Inicio extends StatelessWidget {
             ),
           )),
     );
+  }
+
+  void toScanners(BuildContext context){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => QRScanner()));
   }
 
   Future<void> abrirCamara(BuildContext context) async {
