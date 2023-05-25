@@ -53,7 +53,7 @@ class Tarjeta extends StatelessWidget{
                         ),
                         Icon(
                           Icons.add_a_photo,
-                          size: 35,
+                          size: 345,
                         )
                       ],
                     ),
