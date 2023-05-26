@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class Datos {
   late int _index;
 
@@ -12,7 +14,7 @@ class Datos {
         'nombreCientifico': 'Arachnida',
         'familia': 'Buthidae',
         'alimentacion': 'Insectos, arañas y otros artrópodos pequeños',
-        'ubicacion': ' Durango, Sonora, Coahuila, Chihuahu',
+        'ubicacion': ' Durango, Sonora, Coahuila, Chihuahua',
         'depredadores': 'aves, mamíferos pequeños y reptiles',
       },
     },
@@ -35,6 +37,8 @@ class Datos {
       },
     },
   ];
+
+
 
   String obtenerBusqueda(String busqueda) {
     Map<int, Map<String, String>>? animalData = animalList.firstWhere(
