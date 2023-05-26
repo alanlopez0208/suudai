@@ -85,10 +85,7 @@ class IdentificarPagina extends State<Identificar> {
                     top: 15, left: 10, right: 10, bottom: 20),
                 child: Center(
                   child: Text(
-                    "Animal : ${
-                        category != null ? category!.label.substring(2)
-                            : "Nulo"
-                    } Probabilidad : ${
+                   " Probabilidad : ${
                         category != null ? "${(category!.score*100).toStringAsFixed(2)}%"
                             : "Nulo"
                     }",
