@@ -212,7 +212,7 @@ class IdentificarPagina extends State<Identificar> {
             )
           ],
           centerTitle: true,
-          title: Text("Suudai’")),
+          title: Text("Suudai’ App")),
       drawer: MenuHamburgesa(),
       body: SingleChildScrollView(
         child: imgenAnalizada()

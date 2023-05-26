@@ -27,13 +27,7 @@ class _QRScannerState extends State<QRScanner>{
       appBar: AppBar(
         backgroundColor: Color(0xFF6AA83D),
         centerTitle: true,
-        title: Text("Deteccion QR",
-          style: TextStyle(
-              color: Colors.black87,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1
-          ),
-        ),
+        title: Text("Suudai’ App"),
       ),
       body: Container(
         width: double.infinity,

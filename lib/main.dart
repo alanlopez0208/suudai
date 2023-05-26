@@ -40,14 +40,15 @@ class Inicio extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Color(0xFF6AA83D),
-          actions: <Widget>[
+          /*actions: <Widget>[
             Padding(
               padding: const EdgeInsets.only(right: 20),
               child: Icon(Icons.search, size: 35, color: Colors.black),
             )
           ],
+           */
           centerTitle: true,
-          title: Text("Suudai’")),
+          title: Text("Suudai’ App")),
       drawer: MenuHamburgesa(),
       body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -191,6 +192,7 @@ class Inicio extends StatelessWidget {
                                   image: AssetImage("images/GS3.jpg"),
                                   width: 200,
                                   height: 300,
+                                  colorFilter: ColorFilter.mode(Colors.grey, BlendMode.color),
                                   fit: BoxFit.cover),
                               Positioned(
                                 bottom: 0,
@@ -198,7 +200,7 @@ class Inicio extends StatelessWidget {
                                 left: 0,
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: Colors.green.withOpacity(0.7),
+                                    color: Colors.grey
                                   ),
                                   child: Padding(
                                     padding: EdgeInsets.all(10),
@@ -214,7 +216,7 @@ class Inicio extends StatelessWidget {
                                             fontSize: 24,
                                           ),
                                         ),
-                                        Icon(Icons.map, size: 35)
+                                        Icon(Icons.calendar_month, size: 35)
                                       ],
                                     ),
                                   ),
@@ -234,23 +236,25 @@ class Inicio extends StatelessWidget {
                         child: InkWell(
                           splashColor: Colors.blue.withAlpha(30),
                           onTap: () {
+
                             debugPrint('Card tapped.');
                           },
                           child: Stack(
                             alignment: Alignment.center,
                             children: [
                               Ink.image(
-                                  image: AssetImage("images/LM13.png"),
-                                  width: 200,
-                                  height: 300,
-                                  fit: BoxFit.cover),
+                                image: AssetImage("images/LM13.png"),
+                                width: 200,
+                                colorFilter: ColorFilter.mode(Colors.grey, BlendMode.color),
+                                height: 300,
+                                fit: BoxFit.cover),
                               Positioned(
                                 bottom: 0,
                                 right: 0,
                                 left: 0,
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: Colors.green.withOpacity(0.7),
+                                    color: Colors.grey
                                   ),
                                   child: Padding(
                                     padding: EdgeInsets.all(10),
