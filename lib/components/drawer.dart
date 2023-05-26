@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:suudai/pages/qr/qr_scanner.dart';
+import 'package:suudai/pages/machine%20learning/indeticarPagina.dart';
 import '../main.dart';
-import '../pages/machine learning/indeticarPagina.dart';
+import '../pages/qr/qr_scanner.dart';
 
 class MenuHamburgesa extends StatelessWidget{
   @override
@@ -41,46 +41,32 @@ class MenuHamburgesa extends StatelessWidget{
               title: Text("Escanear"),
               leading: Icon(Icons.qr_code_2,color: Colors.black,),
               onTap: (){
-                Navigator.push(context, MaterialPageRoute
-                  (builder: (context){
-                  return QRScanner();
-                }));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => QRScanner()));
               },
             ),
-            Container(
-              foregroundDecoration: BoxDecoration(border: Border.all(color: Colors.grey.withOpacity(0.7),width: 28,)),
-              child: ListTile(
-                title: Text("Eventos",),
-                leading: Icon(Icons.calendar_month,color: Colors.black,),
-                /*onTap: (){
+            ListTile(
+              title: Text("Eventos"),
+              leading: Icon(Icons.map,color: Colors.black,),
+              onTap: (){
                 Navigator.push(context, MaterialPageRoute
                   (builder: (context){
                   return Inicio();
                 }));
               },
-               */
-              ),
             ),
-
-            Container(
-              child: ListTile(
-                title: Text("Historial"),
-                leading: Icon(Icons.timer,color: Colors.black,),
-                /*onTap: (){
+            ListTile(
+              title: Text("Historial"),
+              leading: Icon(Icons.calendar_month,color: Colors.black,),
+              onTap: (){
                 Navigator.push(context, MaterialPageRoute
                   (builder: (context){
                   return Inicio();
                 }));
               },
-               */
-              ),foregroundDecoration: BoxDecoration(border: Border.all(color: Colors.grey.withOpacity(0.7),width: 28,)),
             ),
-
           ],
         ),
       ),
     );
   }
-
-
 }

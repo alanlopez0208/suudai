@@ -5,7 +5,8 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:suudai/pages/qr/qr_scanner.dart';
 
 class ResultScreen extends StatelessWidget{
-  final List<String> nmSc= const ["Xenospiza Baileyi","Canis Lupus Baileyi","Centruroides sculpturatus"];
+  //pajaro, lobo, alacran
+  final List<String> nmSc= const ["Zonotrichia Leucophrys","Canis Lupus Baileyi","Centruroides sculpturatus"];
   final List<String> nmFm= const ["Passerellidae","Canidae","Scorpionidae"];
   final List<String> nmFood= const ["Granivoro","Carnívoro","Carnívoro"];
   final List<String> nmHunter= const ["Aves de presa","Otros Depredadores","Aves"];
@@ -42,7 +43,7 @@ class ResultScreen extends StatelessWidget{
     }else if(code=="lobo"){
       target = "El lobo mexicano, también conocido como Canis lupus baileyi, es una subespecie de lobo gris nativa de México y considerada una de las especies más emblemáticas y en peligro de extinción en América del Norte. A continuación, se presenta una descripción de esta fascinante especie en una o dos cuartillas:\nEl lobo mexicano es un carnívoro de tamaño mediano a grande que presenta características distintivas en su apariencia. Los adultos suelen medir alrededor de 1.5 metros de longitud, desde la punta de la nariz hasta la base de la cola, y su altura en el hombro puede alcanzar los 76 centímetros. Los machos son generalmente más grandes que las hembras. Su peso varía entre los 27 y los 45 kilogramos, siendo los machos más pesados que las hembras.\nEste lobo se caracteriza por su pelaje espeso y denso, que le permite adaptarse a los climas extremos en los que habita. El color de su pelaje varía desde el gris claro hasta el gris oscuro, con tonos de marrón y negro presentes en algunas zonas. También poseen una capa de pelaje más larga y gruesa durante los meses de invierno para protegerse del frío.\nEl hábitat natural del lobo mexicano se encontraba originalmente en las zonas montañosas y boscosas de México y el suroeste de Estados Unidos. Sin embargo, debido a la caza excesiva y la pérdida de hábitat, su rango de distribución se ha reducido drásticamente. En la actualidad, se encuentran principalmente en áreas protegidas y programas de reintroducción en México y Estados Unidos.\nEste lobo es un animal social que vive en manadas, que generalmente están compuestas por una pareja reproductora y su descendencia. Las manadas suelen estar formadas por alrededor de cinco a ocho individuos, aunque puede variar. Tienen una estructura social jerárquica en la que los machos y las hembras alfa son los líderes de la manada y se encargan de la reproducción y la toma de decisiones importantes.\nLa dieta del lobo mexicano se basa principalmente en carne. Su alimentación incluye una variedad de presas, como ciervos, alces, conejos y roedores. También pueden consumir carroña cuando es necesario. Son cazadores altamente eficientes y trabajan en equipo para emboscar a sus presas, utilizando tácticas de caza coordinadas.\nLa reproducción del lobo mexicano ocurre generalmente una vez al año, durante el invierno. Las parejas alfa son las únicas que se reproducen dentro de la manada. La hembra gesta a los cachorros durante aproximadamente 63 días y luego da a luz a una camada de dos a cinco crías. Los cachorros nacen ciegos y dependen completamente de sus padres durante los primeros meses. A medida que crecen, comienzan a participar en juegos y aprenden habilidades de caza de los adultos.\nLamentablemente, el lobo mexicano se encuentra en peligro crítico de extinción. La caza indiscriminada, la pérdida de hábitat y los conflictos con los seres humanos han sido las principales causas";
     }else if(code=="alacran"){
-      target = "Los alacranes son arácnidos pertenecientes al orden Scorpiones. Tienen un cuerpo segmentado dividido en dos partes principales: el cefalotórax, que alberga los órganos sensoriales y las pinzas delanteras, y el abdomen, que contiene el aguijón venenoso y el telson. Su tamaño varía según la especie, pero generalmente miden entre 2 y 8 centímetros de largo. Su cuerpo está cubierto por una exoesqueleto resistente y quitinoso de color marrón oscuro o negro.\nPoseen ocho patas largas y delgadas que les permiten moverse ágilmente. En la parte delantera, tienen un par de pinzas modificadas que utilizan para capturar presas y defenderse de posibles amenazas. En la parte posterior del abdomen, se encuentra el aguijón curvado, que es su principal arma defensiva. Los alacranes inyectan veneno a través de su aguijón para paralizar a sus presas o defenderse de depredadores.\nEl alacrán tiene un par de pedipalpos, estructuras similares a pequeñas pinzas, que utilizan para manipular y llevar el alimento a la boca. También poseen dos pares de ojos en la parte frontal del cefalotórax, que les permiten detectar movimiento y cambios en la luz.";
+      target = "";
     }
 
 
@@ -56,6 +57,7 @@ class ResultScreen extends StatelessWidget{
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.normal,
+
               ),
             )
           ],
@@ -91,7 +93,13 @@ class ResultScreen extends StatelessWidget{
             }
         ),
         centerTitle: true,
-        title: Text("Suudai’ App"),
+        title: Text("",
+          style: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1
+          ),
+        ),
       ),
         body: Container(
           alignment: Alignment.topCenter,
@@ -127,8 +135,7 @@ class ResultScreen extends StatelessWidget{
                     ],
                   ),color: Color(0xFF6AA83D),
                 ),
-
-
+                getProDes(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
@@ -137,9 +144,9 @@ class ResultScreen extends StatelessWidget{
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: ListTile(
-                      title: Text("Nombre Cientifico"),
+                      title: Text(nmSc[getCurrentTarget(code)]),
                       subtitle: Text(
-                        nmSc[getCurrentTarget(code)],
+                        "Lobus Mexicanos",
                         style: TextStyle(fontSize: 30),
                       ),
 
@@ -153,9 +160,9 @@ class ResultScreen extends StatelessWidget{
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: ListTile(
-                      title: Text("Familia"),
+                      title: Text(nmFm[getCurrentTarget(code)]),
                       subtitle: Text(
-                        nmFm[getCurrentTarget(code)],
+                        "Durango querido",
                         style: TextStyle(fontSize: 30),
                       ),
 
@@ -169,9 +176,9 @@ class ResultScreen extends StatelessWidget{
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: ListTile(
-                      title: Text("Dieta"),
+                      title: Text(nmFood[getCurrentTarget(code)]),
                       subtitle: Text(
-                        nmFood[getCurrentTarget(code)],
+                        "Carne",
                         style: TextStyle(fontSize: 30),
                       ),
 
@@ -185,22 +192,15 @@ class ResultScreen extends StatelessWidget{
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: ListTile(
-                      title: Text("Depredadores"),
+                      title: Text(nmHunter[getCurrentTarget(code)]),
                       subtitle: Text(
-                        nmHunter[getCurrentTarget(code)],
+                        "Ajales",
                         style: TextStyle(fontSize: 30),
                       ),
 
                     ),
                   ),
                 ),
-                SizedBox(height: 15,width: double.infinity),
-                Text("Descripción", style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20
-                ),),
-
-                getProDes(),
               ],
             ),
           )
