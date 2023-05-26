@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:suudai/components/drawer.dart';
 import 'package:suudai/pages/machine%20learning/indeticarPagina.dart';
 import 'package:suudai/pages/qr/qr_scanner.dart';
-
+//hello qt_ai
 void main() {
   runApp(MyApp());
 }
