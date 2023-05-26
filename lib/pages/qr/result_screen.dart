@@ -5,9 +5,25 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:suudai/pages/qr/qr_scanner.dart';
 
 class ResultScreen extends StatelessWidget{
+  final List<String> nmSc= const ["Zonotrichia Leucophrys","Canis Lupus Baileyi","Centruroides sculpturatus"];
+  final List<String> nmFm= const ["Passerellidae","Canidae","Scorpionidae"];
+  final List<String> nmFood= const ["Granivoro","Carnívoro","Carnívoro"];
+  final List<String> nmHunter= const ["Aves de presa","Otros Depredadores","Aves"];
+
 
   final String code;
   final Function() closeScreen;
+  int getCurrentTarget(String target){
+    //0 gorrion serrano
+    //1 lobo mexicano
+    //2 alacran
+    int res=0;
+    if(target=="bird")res=0;
+    else if(target=="lobo")res=1;
+    else if(target=="alacran")res=2;
+    return res;
+  }
+
   Image getProPic(){
     var res;
     if(code=="bird"){
@@ -120,6 +136,71 @@ class ResultScreen extends StatelessWidget{
                   ),color: Color(0xFF6AA83D),
                 ),
                 getProDes(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color:  Color(0xFF6AA83D).withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ListTile(
+                      title: Text(nmSc[getCurrentTarget(code)]),
+                      subtitle: Text(
+                        "Lobus Mexicanos",
+                        style: TextStyle(fontSize: 30),
+                      ),
+
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ListTile(
+                      title: Text(nmFm[getCurrentTarget(code)]),
+                      subtitle: Text(
+                        "Durango querido",
+                        style: TextStyle(fontSize: 30),
+                      ),
+
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ListTile(
+                      title: Text(nmFood[getCurrentTarget(code)]),
+                      subtitle: Text(
+                        "Carne",
+                        style: TextStyle(fontSize: 30),
+                      ),
+
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ListTile(
+                      title: Text(nmHunter[getCurrentTarget(code)]),
+                      subtitle: Text(
+                        "Ajales",
+                        style: TextStyle(fontSize: 30),
+                      ),
+
+                    ),
+                  ),
+                ),
               ],
             ),
           )
