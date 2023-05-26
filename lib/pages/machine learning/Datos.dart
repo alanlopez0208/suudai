@@ -3,7 +3,7 @@ import 'dart:ffi';
 class Datos {
   late int _index;
 
-  Datos(int index){
+  Datos(int index) {
     this._index = index;
   }
 
@@ -38,12 +38,9 @@ class Datos {
     },
   ];
 
-
-
   String obtenerBusqueda(String busqueda) {
-    Map<int, Map<String, String>>? animalData = animalList.firstWhere(
-          (map) => map.containsKey(this._index)
-    );
+    Map<int, Map<String, String>>? animalData =
+        animalList.firstWhere((map) => map.containsKey(this._index));
     if (animalData != null) {
       // Obtener el mapa interno del animal
       Map<String, String> animal = animalData[this._index]!;

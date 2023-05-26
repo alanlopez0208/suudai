@@ -18,6 +18,7 @@ class Identificar extends StatefulWidget {
 
 }
 class IdentificarPagina extends State<Identificar> {
+
   late Classifier _classifier;
   var logger = Logger();
   File? _image;
@@ -26,6 +27,8 @@ class IdentificarPagina extends State<Identificar> {
   img.Image? fox;
   Category? category;
   late Datos _datos;
+
+
   @override
   void initState() {
     super.initState();
@@ -38,7 +41,6 @@ class IdentificarPagina extends State<Identificar> {
     setState(() {
       this.category = pred;
     });
-
   }
 
   Widget imgenAnalizada(){
