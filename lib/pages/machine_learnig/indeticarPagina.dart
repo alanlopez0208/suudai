@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
-import 'package:suudai/components/drawer.dart';
-import 'package:suudai/pages/machine%20learning/Datos.dart';
-import 'package:suudai/pages/machine%20learning/classifier.dart';
-import 'package:suudai/pages/machine%20learning/classifier_quant.dart';
+import 'package:suudai/screens/components/drawer.dart';
+import 'package:suudai/pages/machine_learnig/Datos.dart';
+import 'package:suudai/pages/machine_learnig/classifier.dart';
+import 'package:suudai/pages/machine_learnig/classifier_quant.dart';
 import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 
 class Identificar extends StatefulWidget {
+  const Identificar({super.key, required this.pathFoto});
+
+  final String pathFoto;
+
   @override
   State<StatefulWidget> createState() {
     return IdentificarPagina();
@@ -21,6 +25,7 @@ class IdentificarPagina extends State<Identificar> {
   var logger = Logger();
   File? _image;
   final picker = ImagePicker();
+
   late Image _imageWidget;
   img.Image? fox;
   Category? category;
@@ -30,13 +35,24 @@ class IdentificarPagina extends State<Identificar> {
   void initState() {
     super.initState();
     _classifier = ClassifierQuant();
+    _analizarFotoInicial();
   }
 
   void _predict() async {
     img.Image? imageInput = img.decodeImage(_image!.readAsBytesSync());
     var pred = _classifier.predict(imageInput!);
     setState(() {
-      this.category = pred;
+      category = pred;
+    });
+  }
+
+  void _analizarFotoInicial() {
+    _image = File(widget.pathFoto);
+    _imageWidget = Image.file(_image!);
+    img.Image? imageInput = img.decodeImage(_image!.readAsBytesSync());
+    var pred = _classifier.predict(imageInput!);
+    setState(() {
+      category = pred;
     });
   }
 
@@ -47,9 +63,18 @@ class IdentificarPagina extends State<Identificar> {
         child: Container(
           alignment: Alignment.center,
           child: Center(
-            child: Text(
-              "No has seleccionado ninguna Imagen",
-              style: TextStyle(fontSize: 20),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                width: double.infinity,
+                height: 300,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Container(child: _imageWidget)),
+              ),
             ),
           ),
         ),
@@ -211,12 +236,14 @@ class IdentificarPagina extends State<Identificar> {
 
   void abrirCamara(BuildContext context) async {
     final picture = await picker.pickImage(source: ImageSource.camera);
+    print(picture!.path);
     _procesarImagenSeleccionada(picture);
     Navigator.of(context).pop(); // Cierra el diálogo
   }
 
   void abrirGaleria(BuildContext context) async {
     final picture = await picker.pickImage(source: ImageSource.gallery);
+
     _procesarImagenSeleccionada(picture);
     Navigator.of(context).pop(); // Cierra el diálogo
   }
