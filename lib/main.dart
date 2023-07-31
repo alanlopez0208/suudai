@@ -1,10 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:suudai/desing.dart';
-import 'package:suudai/provider.dart';
-import 'package:suudai/screens/components/drawer.dart';
-import 'package:suudai/pages/qr/qr_scanner.dart';
-import 'package:suudai/screens/home.dart';
+import 'package:suudai/screens/sections/presentation/mapa.dart';
+import 'package:suudai/size_config.dart';
+import 'screens/sections/presentation/animal_info.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,16 +19,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SizeConfig().iniciar(context);
     return MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: colorBackGround,
         fontFamily: "Montserrat",
       ),
-      home: Home(),
+      home: InfoPresentation(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
+
 /*
 class Inicio extends StatelessWidget {
   ImagePicker picker = ImagePicker();

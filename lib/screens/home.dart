@@ -18,7 +18,6 @@ class _HomeState extends State<Home> {
   ];
   @override
   Widget build(BuildContext context) {
-    SizeConfig().iniciar(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: BodyHome(),
