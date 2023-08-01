@@ -37,7 +37,7 @@ class _CameraState extends State<Camera> {
           elevation: 0,
           backgroundColor: Colors.transparent,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -95,10 +95,11 @@ class _CameraState extends State<Camera> {
             ],
           ),
           child: Container(
-            margin: const EdgeInsets.all(5),
+            margin: const EdgeInsets.all(7),
+            padding: const EdgeInsets.all(9),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: colorGreenOpacity,
+              color: colorGreen,
             ),
             child: IconButton(
               onPressed: () async {
@@ -118,9 +119,10 @@ class _CameraState extends State<Camera> {
                   ),
                 );
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.camera_alt_rounded,
-                color: colorsIcon,
+                color: Colors.white,
+                size: 35,
               ),
             ),
           ),

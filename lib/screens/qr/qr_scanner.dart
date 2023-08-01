@@ -31,6 +31,17 @@ class _QRScannerState extends State<QRScanner> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
         body: Stack(
           children: [
             Positioned(
@@ -83,7 +94,7 @@ class _QRScannerState extends State<QRScanner> {
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: SizeConfig.blockSizeHorizontal! * 5,
+                    fontSize: SizeConfig.blockSizeHorizontal! * 4.5,
                   ),
                 ),
               ),

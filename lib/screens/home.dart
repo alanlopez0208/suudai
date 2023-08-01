@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:suudai/desing.dart';
 import 'package:suudai/screens/machine_learning/camera.dart';
 import 'package:suudai/screens/qr/qr_scanner.dart';
+import 'package:suudai/screens/sections/eventos/eventos.dart';
 import 'package:suudai/screens/sections/home/body_home.dart';
+import 'package:suudai/screens/sections/perfil/perfil.dart';
 import 'package:suudai/size_config.dart';
 
 class Home extends StatefulWidget {
@@ -17,6 +19,8 @@ class _HomeState extends State<Home> {
   List<Widget> secciones = [
     const BodyHome(),
     const QRScanner(),
+    const Eventos(),
+    const Perfil(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -57,13 +61,13 @@ class _HomeState extends State<Home> {
                 icono:
                     Icon(_index == 1 ? Icons.qr_code : Icons.qr_code_outlined),
                 onPressed: () {
-                  setState(
-                    () {
-                      _index = 1;
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return const QRScanner();
                     },
-                  );
+                  ));
                 },
-                isSelected: _index == 1,
+                isSelected: false,
               ),
               SizedBox(
                 width: SizeConfig.blockSizeHorizontal,
@@ -92,6 +96,11 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
 
