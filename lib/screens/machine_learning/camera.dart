@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:suudai/desing.dart';
-import 'package:suudai/pages/machine_learnig/indeticarPagina.dart';
+import 'package:suudai/modelos/animal.dart';
+import 'package:suudai/screens/machine_learning/clasificador.dart';
 import 'package:suudai/screens/machine_learning/overlay.dart';
+import 'package:suudai/screens/sections/presentation/animal_info.dart';
 import 'package:suudai/size_config.dart';
+import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 
 class Camera extends StatefulWidget {
   const Camera({super.key});
@@ -27,9 +30,20 @@ class _CameraState extends State<Camera> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
+    return SafeArea(
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        body: Stack(
           children: [
             FutureBuilder<void>(
               future: initCamera(),
@@ -88,22 +102,19 @@ class _CameraState extends State<Camera> {
             ),
             child: IconButton(
               onPressed: () async {
-                await _initializeControllerFuture;
+                String imgPath = await getPath();
 
-                Directory direccion = await getApplicationDocumentsDirectory();
+                Clasificador clasificador = Clasificador(imgPath);
 
-                XFile foto = await _controller.takePicture();
+                Category category = await clasificador.loadImage();
 
-                File fotoGuardar = File(foto.path);
-                String nuevaDireccion = "${direccion.path}/${foto.name}";
-                fotoGuardar.copySync(nuevaDireccion);
+                Animal? animal = animales[int.parse(category.label)];
 
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Identificar(
-                      pathFoto: nuevaDireccion,
-                    ),
+                    builder: (context) =>
+                        AnimalInfo(animal: animal!, imgPath: imgPath),
                   ),
                 );
               },
@@ -129,6 +140,20 @@ class _CameraState extends State<Camera> {
     _initializeControllerFuture = _controller.initialize();
 
     return _initializeControllerFuture;
+  }
+
+  Future<String> getPath() async {
+    await _initializeControllerFuture;
+
+    Directory direccion = await getApplicationDocumentsDirectory();
+
+    XFile foto = await _controller.takePicture();
+
+    File fotoGuardar = File(foto.path);
+    String nuevaDireccion = "${direccion.path}/${foto.name}";
+    fotoGuardar.copySync(nuevaDireccion);
+
+    return nuevaDireccion;
   }
 
   @override

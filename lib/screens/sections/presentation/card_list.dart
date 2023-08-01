@@ -5,7 +5,10 @@ import 'package:suudai/size_config.dart';
 class CardList extends StatelessWidget {
   CardList({
     super.key,
+    required this.informacion,
   });
+
+  final List<String> informacion;
 
   List<String> temas = ["Género", "Familia", "Orden", "Clase"];
   List<String> imagenes = [
@@ -57,7 +60,7 @@ class CardList extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                "Mariposa de Barrio",
+                informacion[index],
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: SizeConfig.blockSizeHorizontal! * 4,

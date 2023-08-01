@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 class ImagesContainer extends StatelessWidget {
   const ImagesContainer({
     super.key,
+    required this.imagenes,
   });
 
+  final List<String> imagenes;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -14,7 +16,7 @@ class ImagesContainer extends StatelessWidget {
         crossAxisSpacing: 15,
         mainAxisSpacing: 10,
       ),
-      itemCount: 10,
+      itemCount: imagenes.length,
       itemBuilder: (context, int index) {
         return Transform.translate(
           offset: Offset(0, index % 2 != 0 ? 20 : 0),
@@ -30,7 +32,7 @@ class ImagesContainer extends StatelessWidget {
                 )
               ],
               image: DecorationImage(
-                image: AssetImage("assets/images/evento1.jpg"),
+                image: AssetImage(imagenes[index]),
                 fit: BoxFit.cover,
               ),
             ),

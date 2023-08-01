@@ -33,7 +33,6 @@ dependencies:
   mobile_scanner: ^1.0.0
   qr_flutter: ^4.0.0
   image_picker: ^0.8.6+1
-
   tflite_flutter: ^0.9.0
   tflite_flutter_helper:
     git:
@@ -78,6 +77,9 @@ flutter:
     - assets/labels.txt
     - assets/model.tflite
     - assets/images/
+    - assets/images/g/
+    - assets/images/lobo/
+    - assets/images/alacran/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

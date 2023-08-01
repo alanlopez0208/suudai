@@ -1,11 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:suudai/desing.dart';
-import 'package:suudai/screens/sections/presentation/mapa.dart';
+import 'package:suudai/screens/home.dart';
 import 'package:suudai/size_config.dart';
-import 'screens/sections/presentation/animal_info.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +21,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: colorBackGround,
         fontFamily: "Montserrat",
       ),
-      home: InfoPresentation(),
+      home: const Home(),
       debugShowCheckedModeBanner: false,
     );
   }

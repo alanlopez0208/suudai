@@ -1,18 +1,17 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
-import 'package:suudai/screens/components/drawer.dart';
-import 'package:suudai/pages/machine_learnig/Datos.dart';
-import 'package:suudai/pages/machine_learnig/classifier.dart';
-import 'package:suudai/pages/machine_learnig/classifier_quant.dart';
+import 'package:suudai/screens/machine_learning/classifier_quant.dart';
 import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
+import 'Datos.dart';
+import '../../screens/machine_learning/classifier.dart';
 
 class Identificar extends StatefulWidget {
-  const Identificar({super.key, required this.pathFoto});
-
-  final String pathFoto;
+  const Identificar({super.key, required this.pathImage});
+  final String pathImage;
 
   @override
   State<StatefulWidget> createState() {
@@ -25,7 +24,6 @@ class IdentificarPagina extends State<Identificar> {
   var logger = Logger();
   File? _image;
   final picker = ImagePicker();
-
   late Image _imageWidget;
   img.Image? fox;
   Category? category;
@@ -35,20 +33,26 @@ class IdentificarPagina extends State<Identificar> {
   void initState() {
     super.initState();
     _classifier = ClassifierQuant();
-    _analizarFotoInicial();
+    loadImage();
+  }
+
+  Future<void> loadImage() async {
+    await _classifier.loadModel();
+
+    try {
+      File archivo = File(widget.pathImage);
+      img.Image? imageInput = img.decodeImage(archivo.readAsBytesSync());
+
+      var pred = _classifier.predict(imageInput!);
+      setState(() {
+        category = pred;
+      });
+    } catch (exception) {
+      debugPrint(exception.toString());
+    }
   }
 
   void _predict() async {
-    img.Image? imageInput = img.decodeImage(_image!.readAsBytesSync());
-    var pred = _classifier.predict(imageInput!);
-    setState(() {
-      category = pred;
-    });
-  }
-
-  void _analizarFotoInicial() {
-    _image = File(widget.pathFoto);
-    _imageWidget = Image.file(_image!);
     img.Image? imageInput = img.decodeImage(_image!.readAsBytesSync());
     var pred = _classifier.predict(imageInput!);
     setState(() {
@@ -63,18 +67,9 @@ class IdentificarPagina extends State<Identificar> {
         child: Container(
           alignment: Alignment.center,
           child: Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                width: double.infinity,
-                height: 300,
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Container(child: _imageWidget)),
-              ),
+            child: Text(
+              "No has seleccionado ninguna Imagen",
+              style: TextStyle(fontSize: 20),
             ),
           ),
         ),
@@ -222,8 +217,9 @@ class IdentificarPagina extends State<Identificar> {
           ],
           centerTitle: true,
           title: Text("Suudai’ App")),
-      drawer: MenuHamburgesa(),
-      body: SingleChildScrollView(child: imgenAnalizada()),
+      body: Container(
+        child: Text(category!.label.toString()),
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF6AA83D),
         onPressed: () {
@@ -236,14 +232,12 @@ class IdentificarPagina extends State<Identificar> {
 
   void abrirCamara(BuildContext context) async {
     final picture = await picker.pickImage(source: ImageSource.camera);
-    print(picture!.path);
     _procesarImagenSeleccionada(picture);
     Navigator.of(context).pop(); // Cierra el diálogo
   }
 
   void abrirGaleria(BuildContext context) async {
     final picture = await picker.pickImage(source: ImageSource.gallery);
-
     _procesarImagenSeleccionada(picture);
     Navigator.of(context).pop(); // Cierra el diálogo
   }

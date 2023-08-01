@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -9,23 +8,23 @@ import 'package:suudai/size_config.dart';
 import 'card_list.dart';
 import 'images_container.dart';
 
-class AnimalInfo extends StatefulWidget {
-  AnimalInfo({super.key, required this.animal, required this.imgPath});
+class LugarInfo extends StatefulWidget {
+  LugarInfo({super.key, required this.animales, required this.imgRegion});
 
-  final Animal animal;
+  final List<Animal> animales;
+  final String imgRegion;
 
-  final String imgPath;
+  String? imgPath;
 
   @override
-  State<AnimalInfo> createState() => _AnimalInfoState();
+  State<LugarInfo> createState() => _LugarInfoState();
 }
 
-class _AnimalInfoState extends State<AnimalInfo> {
+class _LugarInfoState extends State<LugarInfo> {
   int currentPage = 0;
   late PageController _pageController;
   Completer<GoogleMapController> _controller = Completer();
-
-  late Animal animal;
+  late List<Animal> animales;
 
   @override
   void initState() {
@@ -35,7 +34,7 @@ class _AnimalInfoState extends State<AnimalInfo> {
       viewportFraction: 0.5,
     );
 
-    animal = widget.animal;
+    animales = widget.animales;
   }
 
   @override
@@ -68,9 +67,7 @@ class _AnimalInfoState extends State<AnimalInfo> {
                       Container(
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: FileImage(
-                              File(widget.imgPath),
-                            ),
+                            image: AssetImage(widget.imgRegion),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -91,9 +88,10 @@ class _AnimalInfoState extends State<AnimalInfo> {
                         },
                         controller: _pageController,
                         children: List.generate(
-                          1,
-                          (index) =>
-                              pagePhoto(foto: widget.imgPath, index: index),
+                          animales.length,
+                          (index) => pagePhoto(
+                              foto: animales[index].assetsImages[0],
+                              index: index),
                         ),
                       )
                     ],
@@ -128,7 +126,7 @@ class _AnimalInfoState extends State<AnimalInfo> {
                         SizedBox(
                           width: SizeConfig.screenwidth,
                           child: Text(
-                            animal.nombre,
+                            animales[currentPage].nombre,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: SizeConfig.blockSizeHorizontal! * 5,
@@ -144,7 +142,7 @@ class _AnimalInfoState extends State<AnimalInfo> {
                           height: SizeConfig.screenhegit! / 3,
                           width: SizeConfig.screenhegit,
                           child: ImagesContainer(
-                            imagenes: animal.assetsImages,
+                            imagenes: animales[currentPage].assetsImages,
                           ),
                         ),
                         const InfoSubtitle(
@@ -155,10 +153,10 @@ class _AnimalInfoState extends State<AnimalInfo> {
                           height: SizeConfig.screenhegit! / 4.5,
                           child: CardList(
                             informacion: [
-                              animal.genero,
-                              animal.familia,
-                              animal.orden,
-                              animal.clase,
+                              animales[currentPage].genero,
+                              animales[currentPage].familia,
+                              animales[currentPage].orden,
+                              animales[currentPage].clase,
                             ],
                           ),
                         ),
@@ -169,7 +167,7 @@ class _AnimalInfoState extends State<AnimalInfo> {
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            animal.apariencia,
+                            animales[currentPage].apariencia,
                             textAlign: TextAlign.justify,
                             style: TextStyle(
                               fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
@@ -193,11 +191,13 @@ class _AnimalInfoState extends State<AnimalInfo> {
                               zoom: 5.5,
                             ),
                             circles: Set.from(List.generate(
-                                animal.ubicaciones.length, (index) {
+                                animales[currentPage].ubicaciones.length,
+                                (index) {
                               return Circulo(
-                                circleId:
-                                    CircleId("${animal.ubicaciones.length}"),
-                                center: animal.ubicaciones[index],
+                                circleId: CircleId(
+                                    "${animales[currentPage].ubicaciones.length}"),
+                                center:
+                                    animales[currentPage].ubicaciones[index],
                               );
                             })),
                           ),
@@ -233,7 +233,7 @@ class _AnimalInfoState extends State<AnimalInfo> {
         child: CircleAvatar(
           radius: SizeConfig.screenwidth! / 5,
           backgroundColor: Colors.white,
-          backgroundImage: FileImage(File(foto)),
+          backgroundImage: AssetImage(foto),
         ),
       ),
     );

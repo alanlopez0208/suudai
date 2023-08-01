@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:suudai/pages/machine_learnig/indeticarPagina.dart';
+import 'package:suudai/no%20sirve%20estos%20archivos/machine_learnig/indeticarPagina.dart';
 import 'package:suudai/screens/home.dart';
 
 class MenuHamburgesa extends StatelessWidget {
@@ -35,7 +35,7 @@ class MenuHamburgesa extends StatelessWidget {
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return Identificar(
-                    pathFoto: "",
+                    pathImage: "",
                   );
                 }));
               },

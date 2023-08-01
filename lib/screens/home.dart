@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:suudai/desing.dart';
 import 'package:suudai/screens/machine_learning/camera.dart';
+import 'package:suudai/screens/qr/qr_scanner.dart';
 import 'package:suudai/screens/sections/home/body_home.dart';
 import 'package:suudai/size_config.dart';
 
@@ -14,13 +15,14 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _index = 0;
   List<Widget> secciones = [
-    BodyHome(),
+    const BodyHome(),
+    const QRScanner(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: BodyHome(),
+      body: secciones[_index],
       floatingActionButton: FloatingActionButton(
         backgroundColor: colorGreen,
         elevation: 0,
