@@ -64,6 +64,7 @@ class _BodyHomeState extends State<BodyHome> {
               child: Container(
                 decoration: const BoxDecoration(
                   image: DecorationImage(
+                    opacity: 0.5,
                     image: AssetImage("assets/images/topImage.jpg"),
                     fit: BoxFit.cover,
                   ),

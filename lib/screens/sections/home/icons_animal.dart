@@ -22,10 +22,7 @@ class IconsAnimal extends StatelessWidget {
           horizontal: SizeConfig.blockSizeVertical!,
         ),
         child: GestureDetector(
-          onTap: () {
-            Uri url = Uri.parse(link);
-            _launchUrl(url);
-          },
+          onTap: () {},
           child: SizedBox(
             child: AspectRatio(
               aspectRatio: 1,
@@ -60,7 +57,7 @@ class IconsAnimal extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    top: 0,
+                    top: 15,
                     left: 0,
                     right: 0,
                     child: AspectRatio(
@@ -77,9 +74,9 @@ class IconsAnimal extends StatelessWidget {
     );
   }
 
-  Future<void> _launchUrl(Uri url) async {
-    if (!await launchUrl(url)) {
-      throw Exception('Could not launch $url');
-    }
-  }
+  // Future<void> _launchUrl(Uri url) async {
+  //   if (!await launchUrl(url)) {
+  //     throw Exception('Could not launch $url');
+  //   }
+  // }
 }

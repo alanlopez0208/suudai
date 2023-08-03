@@ -161,7 +161,7 @@ class _LugarInfoState extends State<LugarInfo> {
                           ),
                         ),
                         const InfoSubtitle(
-                          titulo: "Apariencia",
+                          titulo: "Características",
                           icono: Icon(Icons.search),
                         ),
                         Padding(

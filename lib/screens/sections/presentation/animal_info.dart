@@ -163,7 +163,7 @@ class _AnimalInfoState extends State<AnimalInfo> {
                           ),
                         ),
                         const InfoSubtitle(
-                          titulo: "Apariencia",
+                          titulo: "Características",
                           icono: Icon(Icons.search),
                         ),
                         Padding(
