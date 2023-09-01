@@ -24,7 +24,6 @@ class _AnimalInfoState extends State<AnimalInfo> {
   int currentPage = 0;
   late PageController _pageController;
   Completer<GoogleMapController> _controller = Completer();
-
   late Animal animal;
 
   @override
@@ -47,7 +46,7 @@ class _AnimalInfoState extends State<AnimalInfo> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back,),
             onPressed: () {
               Navigator.pop(context);
             },

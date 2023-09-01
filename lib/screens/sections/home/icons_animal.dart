@@ -3,6 +3,9 @@ import 'package:suudai/desing.dart';
 import 'package:suudai/size_config.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../machine_learning/camera.dart';
+import '../busqueda/categorias.dart';
+
 class IconsAnimal extends StatelessWidget {
   const IconsAnimal({
     super.key,
@@ -15,6 +18,15 @@ class IconsAnimal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    //print(titulo.toString()+"--------------/////////////////////////////-----------------");
+    int targetShow(){
+      if (titulo == ""){
+
+      }
+      return 0;
+    }
+
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -22,7 +34,11 @@ class IconsAnimal extends StatelessWidget {
           horizontal: SizeConfig.blockSizeVertical!,
         ),
         child: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return Categorias(titulo: titulo,);
+            }));
+          },
           child: SizedBox(
             child: AspectRatio(
               aspectRatio: 1,

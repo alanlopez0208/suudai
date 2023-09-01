@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:suudai/desing.dart';
 import 'package:suudai/size_config.dart';
+import '../../machine_learning/camera.dart';
 import 'card_event.dart';
 import 'icons_animal.dart';
 
@@ -55,6 +56,16 @@ class _BodyHomeState extends State<BodyHome> {
   ];
   @override
   Widget build(BuildContext context) {
+
+    List<IconsAnimal> catList = List.generate(makeIconAnimal.length, (index) {
+      return IconsAnimal(
+        titulo: makeIconAnimal[index]["titulo"]!,
+        imagen: makeIconAnimal[index]["imagen"]!,
+        link: makeIconAnimal[index]["link"]!,
+      );
+    });
+
+
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
@@ -83,7 +94,7 @@ class _BodyHomeState extends State<BodyHome> {
                           color: colorGreen,
                         ),
                         child: Text(
-                          "Sudai App",
+                          "Suudai' App",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: SizeConfig.blockSizeHorizontal! * 4,
@@ -146,13 +157,7 @@ class _BodyHomeState extends State<BodyHome> {
               ),
             ),
             Row(
-              children: List.generate(makeIconAnimal.length, (index) {
-                return IconsAnimal(
-                  titulo: makeIconAnimal[index]["titulo"]!,
-                  imagen: makeIconAnimal[index]["imagen"]!,
-                  link: makeIconAnimal[index]["link"]!,
-                );
-              }),
+              children: catList,
             ),
             const WidgetTitulo(titulo: "Eventos Cerca de Ti"),
             SingleChildScrollView(
