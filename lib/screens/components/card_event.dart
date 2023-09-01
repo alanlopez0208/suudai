@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:suudai/modelos/eventos.dart';
 import 'package:suudai/size_config.dart';
 
 class CardEvent extends StatelessWidget {
-  const CardEvent({
-    super.key,
-    required this.titulo,
-    required this.imagen,
-    required this.lugar,
-    required this.fecha,
-    required this.hora,
-  });
+  const CardEvent({required this.evento});
 
-  final String titulo, imagen, lugar, fecha, hora;
+  final Evento evento;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +31,12 @@ class CardEvent extends StatelessWidget {
                     topLeft: Radius.circular(15),
                     topRight: Radius.circular(15),
                   ),
-                  child: Image(
-                    image: AssetImage(imagen),
-                    fit: BoxFit.cover,
+                  child: Hero(
+                    tag: evento.id,
+                    child: Image(
+                      image: AssetImage(evento.imagenPresnetacion),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -50,12 +47,18 @@ class CardEvent extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      titulo,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: SizeConfig.blockSizeHorizontal! * 3.6,
+                    Expanded(
+                      child: Text(
+                        evento.titulo,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
+                          height: 1.5,
+                        ),
                       ),
+                    ),
+                    SizedBox(
+                      width: 15,
                     ),
                     Icon(
                       Icons.more_horiz,
@@ -79,18 +82,18 @@ class CardEvent extends StatelessWidget {
                       width: 10,
                     ),
                     Text(
-                      fecha,
+                      evento.fecha,
                       style: TextStyle(
-                        fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                        fontSize: SizeConfig.blockSizeHorizontal! * 2.7,
                       ),
                     ),
                     const SizedBox(
                       width: 10,
                     ),
                     Text(
-                      hora,
+                      evento.hora,
                       style: TextStyle(
-                        fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                        fontSize: SizeConfig.blockSizeHorizontal! * 2.7,
                       ),
                     ),
                   ],
@@ -111,9 +114,9 @@ class CardEvent extends StatelessWidget {
                       width: 10,
                     ),
                     Text(
-                      lugar,
+                      evento.lugar,
                       style: TextStyle(
-                        fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                        fontSize: SizeConfig.blockSizeHorizontal! * 2.7,
                       ),
                     ),
                   ],

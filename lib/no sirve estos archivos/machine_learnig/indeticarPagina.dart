@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
@@ -66,7 +65,7 @@ class IdentificarPagina extends State<Identificar> {
         padding: const EdgeInsets.all(8.0),
         child: Container(
           alignment: Alignment.center,
-          child: Center(
+          child: const Center(
             child: Text(
               "No has seleccionado ninguna Imagen",
               style: TextStyle(fontSize: 20),
@@ -102,7 +101,7 @@ class IdentificarPagina extends State<Identificar> {
             child: Center(
               child: Text(
                 " Probabilidad : ${category != null ? "${(category!.score * 100).toStringAsFixed(2)}%" : "Nulo"}",
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2.0),
@@ -113,14 +112,14 @@ class IdentificarPagina extends State<Identificar> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
-                color: Color(0xFF6AA83D).withOpacity(0.5),
+                color: const Color(0xFF6AA83D).withOpacity(0.5),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
-                title: Text("Nombre Comun:"),
+                title: const Text("Nombre Comun:"),
                 subtitle: Text(
-                  "${_datos.obtenerBusqueda("nombreComun")}",
-                  style: TextStyle(fontSize: 30),
+                  _datos.obtenerBusqueda("nombreComun"),
+                  style: const TextStyle(fontSize: 30),
                 ),
               ),
             ),
@@ -132,10 +131,10 @@ class IdentificarPagina extends State<Identificar> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
-                title: Text("Nombre Cientifico:"),
+                title: const Text("Nombre Cientifico:"),
                 subtitle: Text(
-                  "${_datos.obtenerBusqueda("nombreCientifico")}",
-                  style: TextStyle(fontSize: 30),
+                  _datos.obtenerBusqueda("nombreCientifico"),
+                  style: const TextStyle(fontSize: 30),
                 ),
               ),
             ),
@@ -147,10 +146,10 @@ class IdentificarPagina extends State<Identificar> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
-                title: Text("Familia:"),
+                title: const Text("Familia:"),
                 subtitle: Text(
-                  "${_datos.obtenerBusqueda("familia")}",
-                  style: TextStyle(fontSize: 30),
+                  _datos.obtenerBusqueda("familia"),
+                  style: const TextStyle(fontSize: 30),
                 ),
               ),
             ),
@@ -162,10 +161,10 @@ class IdentificarPagina extends State<Identificar> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
-                title: Text("Dieta:"),
+                title: const Text("Dieta:"),
                 subtitle: Text(
-                  "${_datos.obtenerBusqueda("alimentacion")}",
-                  style: TextStyle(fontSize: 30),
+                  _datos.obtenerBusqueda("alimentacion"),
+                  style: const TextStyle(fontSize: 30),
                 ),
               ),
             ),
@@ -177,25 +176,25 @@ class IdentificarPagina extends State<Identificar> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
-                title: Text("Depredadores:"),
+                title: const Text("Depredadores:"),
                 subtitle: Text(
-                  "${_datos.obtenerBusqueda("depredadores")}",
-                  style: TextStyle(fontSize: 30),
+                  _datos.obtenerBusqueda("depredadores"),
+                  style: const TextStyle(fontSize: 30),
                 ),
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: ListTile(
-                  title: Text("Descripcion: "),
+                  title: const Text("Descripcion: "),
                   subtitle: Text(
-                    "${_datos.obtenerBusqueda("descripcion")}",
-                    style: TextStyle(fontSize: 15),
+                    _datos.obtenerBusqueda("descripcion"),
+                    style: const TextStyle(fontSize: 15),
                   ),
                 )),
           ),
@@ -208,24 +207,24 @@ class IdentificarPagina extends State<Identificar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Color(0xFF6AA83D),
-          actions: <Widget>[
+          backgroundColor: const Color(0xFF6AA83D),
+          actions: const <Widget>[
             Padding(
-              padding: const EdgeInsets.only(right: 20),
+              padding: EdgeInsets.only(right: 20),
               child: Icon(Icons.search, size: 35, color: Colors.black),
             )
           ],
           centerTitle: true,
-          title: Text("Suudai’ App")),
+          title: const Text("Suudai’ App")),
       body: Container(
         child: Text(category!.label.toString()),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xFF6AA83D),
+        backgroundColor: const Color(0xFF6AA83D),
         onPressed: () {
           showAlertDialog(context);
         },
-        child: Icon(Icons.camera),
+        child: const Icon(Icons.camera),
       ),
     );
   }
@@ -255,7 +254,7 @@ class IdentificarPagina extends State<Identificar> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Selecciona "),
+          title: const Text("Selecciona "),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -263,7 +262,7 @@ class IdentificarPagina extends State<Identificar> {
                   onPressed: () {
                     abrirGaleria(context);
                   },
-                  child: Text(
+                  child: const Text(
                     "Galeria",
                     style: TextStyle(color: Colors.black),
                   ),
@@ -272,7 +271,7 @@ class IdentificarPagina extends State<Identificar> {
                   onPressed: () {
                     abrirCamara(context);
                   },
-                  child: Text(
+                  child: const Text(
                     "Camara",
                     style: TextStyle(color: Colors.black),
                   ),
@@ -282,7 +281,7 @@ class IdentificarPagina extends State<Identificar> {
           ),
           actions: [
             TextButton(
-              child: Text(
+              child: const Text(
                 'Cerrar',
                 style: TextStyle(color: Colors.black),
               ),

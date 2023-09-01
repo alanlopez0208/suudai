@@ -21,7 +21,7 @@ class ImagesContainer extends StatelessWidget {
         return Transform.translate(
           offset: Offset(0, index % 2 != 0 ? 20 : 0),
           child: Container(
-            margin: EdgeInsets.only(bottom: 10),
+            margin: const EdgeInsets.only(bottom: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
               boxShadow: [

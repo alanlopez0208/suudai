@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:suudai/no%20sirve%20estos%20archivos/qr/qr_overlay.dart';
@@ -24,18 +23,19 @@ class _QRScannerState extends State<QRScanner> {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
-        backgroundColor: Color(0xFF6AA83D),
+        backgroundColor: const Color(0xFF6AA83D),
         centerTitle: true,
-        title: Text("Suudai’ App"),
+        title: const Text("Suudai’ App"),
       ),
       body: Container(
         width: double.infinity,
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Expanded(
+            const Expanded(
                 child: Column(
-              children: const [
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
                 Text(
                   "Escane el codigo QR",
                   style: TextStyle(
@@ -45,7 +45,6 @@ class _QRScannerState extends State<QRScanner> {
                       letterSpacing: 1),
                 ),
               ],
-              mainAxisAlignment: MainAxisAlignment.center,
             )),
             Expanded(
                 child: Stack(
@@ -55,7 +54,7 @@ class _QRScannerState extends State<QRScanner> {
                   onDetect: (barcode, args) {
                     if (!isScanCompleted) {
                       String code = barcode.rawValue ?? '---';
-                      print("1234567890-1234567890" + code);
+                      print("1234567890-1234567890$code");
                       if (code == "bird" ||
                           code == "alacran" ||
                           code == "lobo") {
@@ -77,7 +76,7 @@ class _QRScannerState extends State<QRScanner> {
             Expanded(
                 child: Container(
               alignment: Alignment.center,
-              child: Column(
+              child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(

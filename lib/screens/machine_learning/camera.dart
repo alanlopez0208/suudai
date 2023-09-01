@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:suudai/desing.dart';
 import 'package:suudai/modelos/animal.dart';
@@ -49,7 +48,7 @@ class _CameraState extends State<Camera> {
               future: initCamera(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  return Container(
+                  return SizedBox(
                     width: SizeConfig.screenhegit,
                     height: SizeConfig.screenhegit,
                     child: CameraPreview(_controller),

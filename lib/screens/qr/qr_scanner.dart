@@ -36,7 +36,7 @@ class _QRScannerState extends State<QRScanner> {
           elevation: 0,
           backgroundColor: Colors.transparent,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -48,8 +48,7 @@ class _QRScannerState extends State<QRScanner> {
               child: MobileScanner(
                 allowDuplicates: true,
                 onDetect: (barcode, args) {
-                  debugPrint("checha esto-------------->" +
-                      isScanCompleted.toString());
+                  debugPrint("checha esto-------------->$isScanCompleted");
 
                   if (!isScanCompleted) {
                     String code = barcode.rawValue ?? '---';

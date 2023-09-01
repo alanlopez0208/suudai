@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:suudai/desing.dart';
 import 'package:suudai/screens/home.dart';
+import 'package:suudai/screens/sections/eventos/eventos.dart';
 import 'package:suudai/size_config.dart';
 
 void main() {

@@ -2,7 +2,7 @@ class Datos {
   late int _index;
 
   Datos(int index) {
-    this._index = index;
+    _index = index;
   }
 
   List<Map<int, Map<String, String>>> animalList = [
@@ -47,7 +47,7 @@ class Datos {
 
     if (animalData.isNotEmpty) {
       // Obtener el mapa interno del animal
-      Map<String, String> animal = animalData[this._index]!;
+      Map<String, String> animal = animalData[_index]!;
 
       // Obtener el valor de la propiedad especificada
       String valor = animal[busqueda] ?? '';

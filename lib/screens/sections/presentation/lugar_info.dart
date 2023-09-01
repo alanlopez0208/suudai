@@ -23,7 +23,7 @@ class LugarInfo extends StatefulWidget {
 class _LugarInfoState extends State<LugarInfo> {
   int currentPage = 0;
   late PageController _pageController;
-  Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
   late List<Animal> animales;
 
   @override

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:suudai/desing.dart';
 import 'package:suudai/size_config.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class IconsAnimal extends StatelessWidget {
   const IconsAnimal({

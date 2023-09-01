@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:suudai/no%20sirve%20estos%20archivos/qr/qr_scanner.dart';
 
@@ -26,22 +24,24 @@ class ResultScreen extends StatelessWidget {
     //1 lobo mexicano
     //2 alacran
     int res = 0;
-    if (target == "bird")
+    if (target == "bird") {
       res = 0;
-    else if (target == "lobo")
+    } else if (target == "lobo") {
       res = 1;
-    else if (target == "alacran") res = 2;
+    } else if (target == "alacran") {
+      res = 2;
+    }
     return res;
   }
 
   Image getProPic() {
-    var res;
+    Image res;
     if (code == "bird") {
-      res = Image(image: AssetImage("images/bird1.png"));
+      res = const Image(image: AssetImage("images/bird1.png"));
     } else if (code == "lobo") {
-      res = Image(image: AssetImage("images/lobo1.jpg"));
-    } else if (code == "alacran") {
-      res = Image(
+      res = const Image(image: AssetImage("images/lobo1.jpg"));
+    } else {
+      res = const Image(
         image: AssetImage("images/alacran1.png"),
       );
     }
@@ -64,10 +64,10 @@ class ResultScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(padding: EdgeInsets.all(3.00)),
+            const Padding(padding: EdgeInsets.all(3.00)),
             Text(
               target,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.normal,
               ),
@@ -81,12 +81,14 @@ class ResultScreen extends StatelessWidget {
   }
 
   String getProName(String target) {
-    var res;
-    if (target == "bird")
+    String res;
+    if (target == "bird") {
       res = "Gorrión Serrano";
-    else if (target == "lobo")
+    } else if (target == "lobo") {
       res = "Lobo Mexicano";
-    else if (target == "alacran") res = "Escorpion";
+    } else {
+      res = "Escorpion";
+    }
 
     return res;
   }
@@ -99,15 +101,15 @@ class ResultScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: bgColor,
         appBar: AppBar(
-          backgroundColor: Color(0xFF6AA83D),
+          backgroundColor: const Color(0xFF6AA83D),
           leading: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 closeScreen();
                 Navigator.pop(context);
               }),
           centerTitle: true,
-          title: Text(
+          title: const Text(
             "",
             style: TextStyle(
                 color: Colors.black87,
@@ -127,12 +129,13 @@ class ResultScreen extends StatelessWidget {
                     child: getProPic(),
                   ),
                   Container(
+                    color: const Color(0xFF6AA83D),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           getProName(code),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 33,
                             fontWeight: FontWeight.bold,
                             //backgroundColor: Color(0xFF6AA83D),
@@ -145,19 +148,18 @@ class ResultScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    color: Color(0xFF6AA83D),
                   ),
                   getProDes(),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Color(0xFF6AA83D).withOpacity(0.5),
+                        color: const Color(0xFF6AA83D).withOpacity(0.5),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: ListTile(
                         title: Text(nmSc[getCurrentTarget(code)]),
-                        subtitle: Text(
+                        subtitle: const Text(
                           "Lobus Mexicanos",
                           style: TextStyle(fontSize: 30),
                         ),
@@ -172,7 +174,7 @@ class ResultScreen extends StatelessWidget {
                       ),
                       child: ListTile(
                         title: Text(nmFm[getCurrentTarget(code)]),
-                        subtitle: Text(
+                        subtitle: const Text(
                           "Durango querido",
                           style: TextStyle(fontSize: 30),
                         ),
@@ -187,7 +189,7 @@ class ResultScreen extends StatelessWidget {
                       ),
                       child: ListTile(
                         title: Text(nmFood[getCurrentTarget(code)]),
-                        subtitle: Text(
+                        subtitle: const Text(
                           "Carne",
                           style: TextStyle(fontSize: 30),
                         ),
@@ -202,7 +204,7 @@ class ResultScreen extends StatelessWidget {
                       ),
                       child: ListTile(
                         title: Text(nmHunter[getCurrentTarget(code)]),
-                        subtitle: Text(
+                        subtitle: const Text(
                           "Ajales",
                           style: TextStyle(fontSize: 30),
                         ),

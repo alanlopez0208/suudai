@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:suudai/desing.dart';
+import 'package:suudai/modelos/eventos.dart';
 import 'package:suudai/size_config.dart';
-import 'card_event.dart';
+import '../../components/card_event.dart';
 import 'icons_animal.dart';
 
 class BodyHome extends StatefulWidget {
@@ -158,15 +159,15 @@ class _BodyHomeState extends State<BodyHome> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                  children: List.generate(makeCardDate.length, (index) {
-                return CardEvent(
-                  titulo: makeCardDate[index]["titulo"]!,
-                  imagen: makeCardDate[index]["imagen"]!,
-                  lugar: makeCardDate[index]["lugar"]!,
-                  fecha: makeCardDate[index]["fecha"]!,
-                  hora: makeCardDate[index]["hora"]!,
-                );
-              })),
+                children: List.generate(
+                  2,
+                  (index) {
+                    return CardEvent(
+                      evento: conferencias.eventos[index],
+                    );
+                  },
+                ),
+              ),
             ),
           ],
         ),
