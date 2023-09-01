@@ -10,7 +10,7 @@ import 'card_list.dart';
 import 'images_container.dart';
 
 class AnimalInfo extends StatefulWidget {
-  const AnimalInfo({super.key, required this.animal, required this.imgPath});
+  AnimalInfo({super.key, required this.animal, required this.imgPath});
 
   final Animal animal;
 
@@ -23,8 +23,7 @@ class AnimalInfo extends StatefulWidget {
 class _AnimalInfoState extends State<AnimalInfo> {
   int currentPage = 0;
   late PageController _pageController;
-  final Completer<GoogleMapController> _controller = Completer();
-
+  Completer<GoogleMapController> _controller = Completer();
   late Animal animal;
 
   @override
@@ -47,7 +46,7 @@ class _AnimalInfoState extends State<AnimalInfo> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back,),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -148,7 +147,7 @@ class _AnimalInfoState extends State<AnimalInfo> {
                           ),
                         ),
                         const InfoSubtitle(
-                          titulo: "Clasificación Científica",
+                          titulo: "Clasificación Cinetífica",
                           icono: Icon(Icons.account_tree_outlined),
                         ),
                         SizedBox(

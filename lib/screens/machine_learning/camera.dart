@@ -107,7 +107,7 @@ class _CameraState extends State<Camera> {
                 Clasificador clasificador = Clasificador(imgPath);
 
                 Category category = await clasificador.loadImage();
-
+                print("99999999999999999999"+category.label.toString());
                 Animal? animal = animales[int.parse(category.label)];
 
                 Navigator.push(
