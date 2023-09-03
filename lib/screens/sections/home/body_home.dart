@@ -3,6 +3,8 @@ import 'package:suudai/desing.dart';
 import 'package:suudai/modelos/eventos.dart';
 import 'package:suudai/size_config.dart';
 import '../../components/card_event.dart';
+import '../../machine_learning/camera.dart';
+import 'card_event.dart';
 import 'icons_animal.dart';
 
 class BodyHome extends StatefulWidget {
@@ -84,7 +86,7 @@ class _BodyHomeState extends State<BodyHome> {
                           color: colorGreen,
                         ),
                         child: Text(
-                          "Sudai App",
+                          "Suudai' App",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: SizeConfig.blockSizeHorizontal! * 4,

@@ -5,6 +5,9 @@ import 'package:suudai/size_config.dart';
 import '../../machine_learning/camera.dart';
 import '../busqueda/categorias.dart';
 
+import '../../machine_learning/camera.dart';
+import '../busqueda/categorias.dart';
+
 class IconsAnimal extends StatelessWidget {
   const IconsAnimal({
     super.key,

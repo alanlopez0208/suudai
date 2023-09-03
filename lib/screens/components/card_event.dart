@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:suudai/modelos/eventos.dart';
 import 'package:suudai/size_config.dart';
 
 class CardEvent extends StatelessWidget {
