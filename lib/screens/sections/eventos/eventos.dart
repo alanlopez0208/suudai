@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:suudai/desing.dart';
 import 'package:suudai/modelos/eventos.dart';
 import 'package:suudai/screens/components/card_event.dart';
-import 'package:suudai/screens/sections/eventos/evento_detalle.dart';
 import 'package:suudai/size_config.dart';
 
 class Eventos extends StatefulWidget {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:suudai/desing.dart';
 import 'package:suudai/size_config.dart';
 
+// ignore: must_be_immutable
 class CardList extends StatelessWidget {
   CardList({
     super.key,

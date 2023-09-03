@@ -8,6 +8,7 @@ import 'package:suudai/size_config.dart';
 import 'card_list.dart';
 import 'images_container.dart';
 
+// ignore: must_be_immutable
 class LugarInfo extends StatefulWidget {
   LugarInfo({super.key, required this.animales, required this.imgRegion});
 
