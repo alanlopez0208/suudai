@@ -8,3 +8,5 @@ Color colorsIconSecundary = Colors.grey;
 Color colorBrown = const Color(0xFF795548);
 Color colorBrownOpacity = const Color(0xFF795548).withOpacity(0.2);
 Color colorBackGroundCard = const Color(0xFFECF6ED);
+Color colorBackgroundNew =
+    const Color(0xFFFAF3E0); // Un amarillo pálido como ejemplo

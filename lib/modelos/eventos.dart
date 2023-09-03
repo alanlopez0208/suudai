@@ -39,7 +39,7 @@ CategoriaEvento excursion = CategoriaEvento(
     ),
     Evento(
       id: "excursion2",
-      titulo: "Caminata para Observar Aves Endemica",
+      titulo: "Caminata para Observar Aves Endemicas",
       imagenes: [
         "assets/images/eventos/excursion/evento2img1.jpeg",
         "assets/images/eventos/excursion/evento2img2.jpeg",
@@ -48,7 +48,7 @@ CategoriaEvento excursion = CategoriaEvento(
           "Una caminata guiada por un experto en aves para observar y aprender sobre ellas.",
       imagenPresnetacion:
           "assets/images/eventos/excursion/evento2Presentacion.jpeg",
-      lugar: "Rodeo, Durango.",
+      lugar: "Canatlán, Durango.",
       fecha: "12 de septiembre de 2023",
       hora: "15:00 - 17:00",
     ),

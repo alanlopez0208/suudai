@@ -109,23 +109,8 @@ class _EventosState extends State<Eventos> {
                   children: List.generate(
                     eventos.length,
                     (index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return EventoDetalle(
-                                  id: eventos[index].id,
-                                  evento: eventos[index],
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        child: CardEvent(
-                          evento: eventos[index],
-                        ),
+                      return CardEvent(
+                        evento: eventos[index],
                       );
                     },
                   ),
