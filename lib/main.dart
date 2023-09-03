@@ -1,298 +1,165 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:suudai/components/drawer.dart';
-import 'package:suudai/pages/machine%20learning/indeticarPagina.dart';
-import 'package:suudai/pages/qr/qr_scanner.dart';
-//hello qt_ai
+import 'package:suudai/desing.dart';
+import 'package:suudai/screens/home.dart';
+import 'package:suudai/screens/sections/eventos/eventos.dart';
+import 'package:suudai/size_config.dart';
+
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SizeConfig().iniciar(context);
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-          fontFamily: "Poppins",
-          textTheme: const TextTheme(
-              headline1: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
-              headline6: TextStyle(
-                fontSize: 45.0,
-                color: Colors.white,
-              ),
-              bodyText2: TextStyle(fontSize: 50.0, color: Colors.black))),
-      home: Inicio(),
+        scaffoldBackgroundColor: colorBackGround,
+        fontFamily: "Montserrat",
+      ),
+      home: const Home(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
+/*
 class Inicio extends StatelessWidget {
   ImagePicker picker = ImagePicker();
+
+  Inicio({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Color(0xFF6AA83D),
-          /*actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: Icon(Icons.search, size: 35, color: Colors.black),
-            )
-          ],
-           */
-          centerTitle: true,
-          title: Text("Suudai’ App")),
+        backgroundColor: const Color(0xFF6AA83D),
+        centerTitle: true,
+        title: Text("Suudai’ App"),
+      ),
       drawer: MenuHamburgesa(),
       body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Card(
-                        clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: InkWell(
-                          splashColor: Colors.blue.withAlpha(30),
-                          onTap: () {
-                            Navigator.push(context,
-                            MaterialPageRoute(builder: (context){
-                              return Identificar();
-                            }));
-                          },
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Ink.image(
-                                  image: AssetImage("images/A13.jpg"),
-                                  width: MediaQuery.of(context).size.width/2,
-                                  height: 300,
-                                  fit: BoxFit.cover),
-                              Positioned(
-                                bottom: 0,
-                                right: 0,
-                                left: 0,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.green.withOpacity(0.7),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: <Widget>[
-                                        Text(
-                                          'Identificar',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: 24,
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.add_a_photo,
-                                          size: 35,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+        padding: EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: double.infinity,
+                      color: Colors.red,
+                      child: Text("Hola Mundo"),
                     ),
-                    Expanded(
-                      child: Card(
-                        clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: InkWell(
-                          splashColor: Colors.blue.withAlpha(30),
-                          onTap: () {
-                            toScanners(context);
-                          },
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Ink.image(
-                                  image: AssetImage("images/ajolote.jpg"),
-                                  width: 200,
-                                  height: 300,
-                                  fit: BoxFit.cover),
-                              Positioned(
-                                bottom: 0,
-                                right: 0,
-                                left: 0,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.green.withOpacity(0.7),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: <Widget>[
-                                        Text(
-                                          'Escanear',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: 24,
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.qr_code_2,
-                                          size: 30,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Card(
-                        clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: InkWell(
-                          splashColor: Colors.blue.withAlpha(30),
-                          onTap: () {
-                            debugPrint('Card tapped.');
-                          },
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Ink.image(
-                                  image: AssetImage("images/GS3.jpg"),
-                                  width: 200,
-                                  height: 300,
-                                  colorFilter: ColorFilter.mode(Colors.grey, BlendMode.color),
-                                  fit: BoxFit.cover),
-                              Positioned(
-                                bottom: 0,
-                                right: 0,
-                                left: 0,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: <Widget>[
-                                        Text(
-                                          'Eventos',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: 24,
-                                          ),
-                                        ),
-                                        Icon(Icons.calendar_month, size: 35)
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Card(
-                        clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: InkWell(
-                          splashColor: Colors.blue.withAlpha(30),
-                          onTap: () {
-
-                            debugPrint('Card tapped.');
-                          },
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Ink.image(
-                                image: AssetImage("images/LM13.png"),
-                                width: 200,
-                                colorFilter: ColorFilter.mode(Colors.grey, BlendMode.color),
-                                height: 300,
-                                fit: BoxFit.cover),
-                              Positioned(
-                                bottom: 0,
-                                right: 0,
-                                left: 0,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: <Widget>[
-                                        Text(
-                                          'Historial',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: 24,
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.timer,
-                                          size: 35,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
+                  ),
+                ],
+              ),
             ),
-          )),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: double.infinity,
+                      color: Colors.green,
+                      child: Text("Hola Mundo"),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      color: Colors.blue,
+                      child: Container(
+                        color: Colors.amber,
+                        height: double.infinity,
+                        padding: EdgeInsets.all(20),
+                        child: Text("probando"),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
-  void toScanners(BuildContext context){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => QRScanner()));
+  void toScanners(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => QRScanner()));
   }
 }
+
+class CardInicio extends StatelessWidget {
+  const CardInicio({
+    super.key,
+    required this.titulo,
+    required this.icono,
+    required this.imagen,
+  });
+
+  final String titulo, imagen;
+  final Icon icono;
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: InkWell(
+        splashColor: Colors.blue.withAlpha(30),
+        onTap: () {
+          debugPrint('Card tapped.');
+        },
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            AspectRatio(
+              aspectRatio: 1,
+              child: Ink.image(
+                  image: AssetImage(imagen),
+                  colorFilter:
+                      const ColorFilter.mode(Colors.grey, BlendMode.color),
+                  fit: BoxFit.cover),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: Container(
+                decoration: const BoxDecoration(color: Colors.grey),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Text(
+                        titulo,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 24,
+                        ),
+                      ),
+                      icono
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+*/
