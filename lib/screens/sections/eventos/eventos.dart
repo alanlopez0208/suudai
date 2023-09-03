@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'package:suudai/desing.dart';
 import 'package:suudai/modelos/eventos.dart';
 import 'package:suudai/screens/components/card_event.dart';
@@ -110,23 +109,8 @@ class _EventosState extends State<Eventos> {
                   children: List.generate(
                     eventos.length,
                     (index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return EventoDetalle(
-                                  id: eventos[index].id,
-                                  evento: eventos[index],
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        child: CardEvent(
-                          evento: eventos[index],
-                        ),
+                      return CardEvent(
+                        evento: eventos[index],
                       );
                     },
                   ),
