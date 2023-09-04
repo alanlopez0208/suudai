@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:suudai/desing.dart';
 import 'package:suudai/modelos/animal.dart';
@@ -107,7 +108,7 @@ class _CameraState extends State<Camera> {
                 Clasificador clasificador = Clasificador(imgPath);
 
                 Category category = await clasificador.loadImage();
-                print("99999999999999999999"+category.label.toString());
+
                 Animal? animal = animales[int.parse(category.label)];
 
                 Navigator.push(

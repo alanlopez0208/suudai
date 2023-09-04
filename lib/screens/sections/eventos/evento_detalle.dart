@@ -202,7 +202,7 @@ class _EventoDetalleState extends State<EventoDetalle> {
                   minWidth: double.infinity,
                   onPressed: () {},
                   child: Text(
-                    "Guardar Evento",
+                    "Asistir al Evento",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,

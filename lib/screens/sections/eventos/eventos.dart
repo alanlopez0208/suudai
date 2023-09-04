@@ -47,76 +47,74 @@ class _EventosState extends State<Eventos> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: SizeConfig.blockSizeHorizontal! * 4,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: SizeConfig.blockSizeVertical! * 3,
-                  ),
-                  child: Text(
-                    "Explorar Eventos",
-                    style: TextStyle(
-                      fontSize: SizeConfig.screenwidth! * 0.06,
-                      fontWeight: FontWeight.bold,
-                    ),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: SizeConfig.blockSizeHorizontal! * 4,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: SizeConfig.blockSizeVertical! * 3,
+                ),
+                child: Text(
+                  "Explorar Eventos",
+                  style: TextStyle(
+                    fontSize: SizeConfig.screenwidth! * 0.06,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
-                  height: SizeConfig.blockSizeVertical,
+              ),
+              SizedBox(
+                height: SizeConfig.blockSizeVertical,
+              ),
+              SizedBox(
+                height: SizeConfig.screenhegit! * 0.13,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: itemFiltro.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        setState(
+                          () {
+                            eventos.clear();
+                            seleccionado = index;
+                            if (seleccionado == 0) {
+                              todosEventos.forEach((key, value) {
+                                eventos.addAll(value.eventos);
+                              });
+                            } else {
+                              eventos.addAll(todosEventos[index]!.eventos);
+                            }
+                          },
+                        );
+                      },
+                      child: ItemFilter(
+                        icono: itemFiltro[index]["icono"],
+                        titulo: itemFiltro[index]["titulo"],
+                        selccionado: index == seleccionado,
+                      ),
+                    );
+                  },
                 ),
-                SizedBox(
-                  height: SizeConfig.screenhegit! * 0.13,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: itemFiltro.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          setState(
-                            () {
-                              eventos.clear();
-                              seleccionado = index;
-                              if (seleccionado == 0) {
-                                todosEventos.forEach((key, value) {
-                                  eventos.addAll(value.eventos);
-                                });
-                              } else {
-                                eventos.addAll(todosEventos[index]!.eventos);
-                              }
-                            },
-                          );
-                        },
-                        child: ItemFilter(
-                          icono: itemFiltro[index]["icono"],
-                          titulo: itemFiltro[index]["titulo"],
-                          selccionado: index == seleccionado,
-                        ),
-                      );
-                    },
-                  ),
+              ),
+              SizedBox(
+                height: SizeConfig.blockSizeVertical! * 5,
+              ),
+              Column(
+                children: List.generate(
+                  eventos.length,
+                  (index) {
+                    return CardEvent(
+                      evento: eventos[index],
+                    );
+                  },
                 ),
-                SizedBox(
-                  height: SizeConfig.blockSizeVertical! * 5,
-                ),
-                Column(
-                  children: List.generate(
-                    eventos.length,
-                    (index) {
-                      return CardEvent(
-                        evento: eventos[index],
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
