@@ -4,6 +4,8 @@ import 'package:suudai/modelos/eventos.dart';
 import 'package:suudai/screens/sections/eventos/evento_detalle.dart';
 import 'package:suudai/size_config.dart';
 
+import '../../modelos/eventos.dart';
+
 class CardEvent extends StatelessWidget {
   const CardEvent({required this.evento});
 
