@@ -1,11 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:suudai/desing.dart';
 import 'package:suudai/modelos/animal.dart';
+import 'package:suudai/modelos/archivos.dart';
 import 'package:suudai/screens/machine_learning/clasificador.dart';
 import 'package:suudai/screens/machine_learning/overlay.dart';
 import 'package:suudai/screens/sections/presentation/animal_info.dart';
@@ -111,6 +111,9 @@ class _CameraState extends State<Camera> {
 
                 Animal? animal = animales[int.parse(category.label)];
 
+                guardarAninal(
+                    idAnimal: int.parse(category.label), direccion: imgPath);
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -156,6 +159,43 @@ class _CameraState extends State<Camera> {
     fotoGuardar.copySync(nuevaDireccion);
 
     return nuevaDireccion;
+  }
+
+  void guardarAninal({required int idAnimal, required String direccion}) async {
+    final directory = await getApplicationDocumentsDirectory();
+    final filePath = '${directory.path}/his.json';
+
+    List<Historial> listaHistorial = [];
+
+    if (await File(filePath).exists()) {
+      final jsonString = await File(filePath).readAsString();
+      final jsonData = jsonDecode(jsonString);
+
+      for (var element in jsonData) {
+        print("<-<-<-<-<<-<" + element.toString());
+        final historial = Historial.fromJson(element);
+        listaHistorial.add(historial);
+      }
+    }
+    // Agregar el nuevo valor (animal) a la lista de datos
+    final fechaActual = DateTime.now().toString();
+    Historial historial = Historial(
+      animal: idAnimal,
+      path: direccion,
+      fecha: fechaActual,
+    );
+
+    listaHistorial.add(historial);
+
+    // Convertir la lista de datos a JSO
+    final jsonData = listaHistorial.map((dato) {
+      return dato.toJson();
+    }).toList();
+
+    String jsonString = jsonEncode(jsonData);
+
+    // Escribir los datos JSON actualizados en el archivo
+    await File(filePath).writeAsString(jsonString);
   }
 
   @override

@@ -1,7 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:suudai/desing.dart';
+import 'package:suudai/modelos/animal.dart';
+import 'package:suudai/modelos/archivos.dart';
+import 'package:suudai/screens/sections/presentation/animal_info.dart';
+import 'package:suudai/screens/sections/presentation/lugar_info.dart';
 import 'package:suudai/size_config.dart';
 
 class Perfil extends StatefulWidget {
@@ -13,21 +18,13 @@ class Perfil extends StatefulWidget {
 
 class _PerfilState extends State<Perfil> with TickerProviderStateMixin {
   late TabController tabController;
-  late Color color;
+  late int filtro;
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 2, vsync: this);
-    cambiarColor();
-  }
-
-  void cambiarColor() {
-    if (tabController.index == 0) {
-      color = Colors.blue;
-    } else {
-      color = Colors.green;
-    }
+    filtro = 0;
   }
 
   @override
@@ -51,7 +48,10 @@ class _PerfilState extends State<Perfil> with TickerProviderStateMixin {
                 ),
                 Text(
                   "Usuario Predefinido",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: SizeConfig.blockSizeHorizontal! * 4,
+                  ),
                 )
               ],
             ),
@@ -64,7 +64,7 @@ class _PerfilState extends State<Perfil> with TickerProviderStateMixin {
               child: TabBar(
                 onTap: (value) {
                   setState(() {
-                    cambiarColor();
+                    filtro = value;
                   });
                 },
                 unselectedLabelColor: Colors.grey,
@@ -74,7 +74,7 @@ class _PerfilState extends State<Perfil> with TickerProviderStateMixin {
                 tabs: const <Tab>[
                   Tab(
                     icon: Icon(
-                      Icons.home,
+                      Icons.photo,
                     ),
                   ),
                   Tab(
@@ -86,25 +86,173 @@ class _PerfilState extends State<Perfil> with TickerProviderStateMixin {
               ),
             ),
           ),
+          FutureBuilder(
+            future: leerArchivoJson(filtro),
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data!.length > 0) {
+                return SliverGrid.builder(
+                  itemCount: snapshot.data!.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1,
+                    crossAxisSpacing: 20,
+                    childAspectRatio: 1 / 0.5,
+                  ),
+                  itemBuilder: (context, index) {
+                    Historial historial = snapshot.data![index];
+
+                    Animal? animal = animales[historial.animal];
+                    return CardAnimal(
+                      titulo: animal!.nombre,
+                      imagen: historial.path,
+                      fecha: historial.fecha,
+                      idAnimal: historial.animal,
+                    );
+                  },
+                );
+              } else {
+                return const SliverToBoxAdapter(
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text("NO SE HA REGISTRADO NINGUNA EVENTO"),
+                    ),
+                  ),
+                );
+              }
+            },
+          ),
         ],
       ),
     );
   }
 
-  Future<List<File>> exportarDatos() async {
-    Directory direccion = await getApplicationDocumentsDirectory();
+// Función para leer y analizar un archivo JSON y retornar la lista de mapas
+  Future<List<Historial>> leerArchivoJson(int filtro) async {
+    List<Historial> listaHistorial = [];
+    if (filtro == 0) {
+      try {
+        final directory = await getApplicationDocumentsDirectory();
+        final filePath = '${directory.path}/his.json';
 
-    final files = direccion.listSync();
+        final file = File(filePath);
+        final jsonString = await file.readAsString();
+        final jsonData = json.decode(jsonString);
 
-    List<File> imagenes = List.empty(growable: true);
-
-    for (var archivo in files) {
-      if (archivo is File) {
-        imagenes.add(archivo);
+        for (var element in jsonData) {
+          final historial = Historial.fromJson(element);
+          listaHistorial.add(historial);
+        }
+        print("<-<-<-<-<-<-<-<-" + listaHistorial.length.toString());
+        return listaHistorial;
+      } catch (e) {
+        print("Error al leer el archivo JSON: $e");
+        return [];
       }
     }
+    return listaHistorial;
+  }
+}
 
-    return imagenes;
+class CardAnimal extends StatelessWidget {
+  const CardAnimal({
+    super.key,
+    required this.titulo,
+    required this.imagen,
+    required this.fecha,
+    required this.idAnimal,
+  });
+
+  final String titulo, imagen, fecha;
+  final int idAnimal;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding:
+          EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal!),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        width: SizeConfig.screenwidth! / 1,
+        child: GestureDetector(
+          onTap: () {
+            List<Animal> otro = [interchangeImages(titulo)];
+            String regionPath = "assets/images/g/g1.jpg";
+            Animal? animal = animales[idAnimal];
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      AnimalInfo(animal: animal!, imgPath: imagen)),
+            );
+          },
+          child: Card(
+            elevation: 5,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Column(
+              children: <Widget>[
+                AspectRatio(
+                  aspectRatio: 1 / 0.3,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
+                    ),
+                    child: Image(
+                      image: FileImage(File(imagen)),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: SizeConfig.blockSizeHorizontal! * 5,
+                    vertical: SizeConfig.blockSizeHorizontal! * 5,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        titulo,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: SizeConfig.blockSizeHorizontal! * 4,
+                        ),
+                      ),
+                      Text(
+                        fecha.substring(0, 10),
+                        style: TextStyle(
+                          fontSize: SizeConfig.blockSizeHorizontal! * 3.6,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Animal interchangeImages(String titulo) {
+    if (titulo == "Aves")
+      return gorrion;
+    else if (titulo == "Mamiferos")
+      return lobo;
+    else if (titulo == "Insectos") return alacran;
+    return lobo;
+  }
+
+  String interchangeNames(String titulo) {
+    if (titulo == "Aves")
+      return "Gorrion Serrano";
+    else if (titulo == "Mamiferos")
+      return "Lobo Mexicano";
+    else if (titulo == "Insectos") return "Alacran";
+    return "";
   }
 }
 

@@ -95,7 +95,7 @@ class _BodyHomeState extends State<BodyHome> {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        "Bienvenidio",
+                        "Bienvenido",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: SizeConfig.blockSizeHorizontal! * 10,
