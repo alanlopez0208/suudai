@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:suudai/desing.dart';
 import 'package:suudai/modelos/eventos.dart';
 import 'package:suudai/size_config.dart';
+import '../../../modelos/animal.dart';
 import '../../components/card_event.dart';
 import '../../machine_learning/camera.dart';
 //import 'card_event.dart';
+import '../presentation/lugar_info.dart';
 import 'icons_animal.dart';
 
 class BodyHome extends StatefulWidget {
@@ -15,6 +17,49 @@ class BodyHome extends StatefulWidget {
 }
 
 class _BodyHomeState extends State<BodyHome> {
+
+  TextEditingController conSearch = TextEditingController();
+
+  List<Widget> searchRes(){
+    List<Widget> res = [Text("")];
+
+    return res;
+  }
+
+  void compareSearch(){
+    String target = this.conSearch.text.toString().toLowerCase();
+    bool targetFound = false;
+    List<Animal> otro = [];
+    if(target.contains('gorrion serrano')||target.contains('gorrión serrano')){
+      targetFound = true;
+      otro = [gorrion];
+      print("QQQQQQQQQQ----gorrion");
+    }else if(target.contains('lobo mexicano')||target.contains('lobo')){
+      targetFound = true;
+      otro = [lobo];
+      print("QQQQQQQQQQ----lobo");
+    }else if(target.contains('alacran')||target.contains('alacrán')){
+      targetFound = true;
+      otro = [alacran];
+      print("QQQQQQQQQQ----lobo");
+    }else       print("QQQQQQQQQQ----+");
+
+    String regionPath = "assets/images/g/g1.jpg";
+    if (targetFound){
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LugarInfo(
+            animales: otro,
+            imgRegion: regionPath,
+          ),
+        ),
+      );
+      targetFound = false;
+    }
+  }
+
   List<Map<String, String>> makeIconAnimal = [
     {
       "titulo": "Aves",
@@ -122,6 +167,12 @@ class _BodyHomeState extends State<BodyHome> {
                             ],
                           ),
                           child: TextField(
+                            controller: conSearch,
+                              onEditingComplete:
+                                (){
+                                  compareSearch();
+                                  print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF))))"+conSearch.text.toString());
+                                },
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               prefixIcon: Padding(
@@ -146,7 +197,13 @@ class _BodyHomeState extends State<BodyHome> {
                     ),
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: Text("lllollll"),
+                      child: Container(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: searchRes(),
+                          ),
+                        ),
+                      ),
                     )
                   ],
                 ),
