@@ -62,13 +62,13 @@ CategoriaEvento conferencias = CategoriaEvento(
       titulo:
           "Conferencia sobre Conservación de Especies en Peligro de Extinción",
       imagenes: [
-        "assets/images/eventos/conferencias/evento1img1.jpg",
-        "assets/images/eventos/conferencias/evento1img2.jpg",
+        "assets/images/eventos/conferencias/img1.jpg",
+        "assets/images/eventos/conferencias/img2.jpg",
       ],
       descripcion:
           "Un experto en conservación de fauna silvestre discute los desafíos y las estrategias para proteger a las especies en peligro de extinción en la región.",
       imagenPresnetacion:
-          "assets/images/eventos/conferencias/evento1Presentacion.jpg",
+          "assets/images/eventos/conferencias/img3.jpg",
       lugar: "Durango, Durango",
       fecha: "5 de octubre de 2023",
       hora: "18:00 - 20:00",
@@ -78,12 +78,12 @@ CategoriaEvento conferencias = CategoriaEvento(
       titulo:
           "Charla sobre la Migración de Aves en la Ruta de las Aves Migratorias",
       imagenes: [
-        "assets/images/noImage.png",
-        "assets/images/noImage.png",
+        "assets/images/eventos/conferencias/img1.jpg",
+        "assets/images/eventos/conferencias/img2.jpg",
       ],
       descripcion:
           "Un ornitólogo experto presenta las rutas migratorias de las aves y su importancia para la conservación global de las aves.",
-      imagenPresnetacion: "assets/images/noImage.png",
+      imagenPresnetacion:  "assets/images/eventos/conferencias/img3.jpg",
       lugar: "Centro de Visitantes del Parque Nacional.",
       fecha: "5 de noviembre de 2023",
       hora: "14:00 - 16:00",

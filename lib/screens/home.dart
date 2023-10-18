@@ -34,6 +34,7 @@ class _HomeState extends State<Home> {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return const Camera();
           }));
+          setState(() {});
         },
         child: const Icon(Icons.camera_alt_outlined),
       ),
@@ -61,11 +62,13 @@ class _HomeState extends State<Home> {
                 icono:
                     Icon(_index == 1 ? Icons.qr_code : Icons.qr_code_outlined),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const QRScanner();
-                    },
-                  ));
+                  setState(() {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return const QRScanner();
+                      },
+                    ));
+                  });
                 },
                 isSelected: false,
               ),

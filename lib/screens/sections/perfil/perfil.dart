@@ -89,13 +89,11 @@ class _PerfilState extends State<Perfil> with TickerProviderStateMixin {
           FutureBuilder(
             future: leerArchivoJson(filtro),
             builder: (context, snapshot) {
-              if (snapshot.hasData && snapshot.data!.length > 0) {
+              if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                 return SliverGrid.builder(
                   itemCount: snapshot.data!.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    crossAxisSpacing: 20,
-                    childAspectRatio: 1 / 0.5,
+                    crossAxisCount: 2,
                   ),
                   itemBuilder: (context, index) {
                     Historial historial = snapshot.data![index];
@@ -133,16 +131,16 @@ class _PerfilState extends State<Perfil> with TickerProviderStateMixin {
       try {
         final directory = await getApplicationDocumentsDirectory();
         final filePath = '${directory.path}/his.json';
-
         final file = File(filePath);
-        final jsonString = await file.readAsString();
-        final jsonData = json.decode(jsonString);
+        if (await file.exists()) {
+          final jsonString = await file.readAsString();
+          final jsonData = json.decode(jsonString);
 
-        for (var element in jsonData) {
-          final historial = Historial.fromJson(element);
-          listaHistorial.add(historial);
+          for (var element in jsonData) {
+            final historial = Historial.fromJson(element);
+            listaHistorial.add(historial);
+          }
         }
-        print("<-<-<-<-<-<-<-<-" + listaHistorial.length.toString());
         return listaHistorial;
       } catch (e) {
         print("Error al leer el archivo JSON: $e");
@@ -150,6 +148,12 @@ class _PerfilState extends State<Perfil> with TickerProviderStateMixin {
       }
     }
     return listaHistorial;
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }
 
@@ -170,13 +174,10 @@ class CardAnimal extends StatelessWidget {
     return Padding(
       padding:
           EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal!),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 10),
-        width: SizeConfig.screenwidth! / 1,
+      child: SizedBox(
+        height: SizeConfig.screenhegit! / 3,
         child: GestureDetector(
           onTap: () {
-            List<Animal> otro = [interchangeImages(titulo)];
-            String regionPath = "assets/images/g/g1.jpg";
             Animal? animal = animales[idAnimal];
             Navigator.push(
               context,
@@ -193,11 +194,11 @@ class CardAnimal extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 AspectRatio(
-                  aspectRatio: 1 / 0.3,
+                  aspectRatio: 4 / 3,
                   child: ClipRRect(
                     borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
                     ),
                     child: Image(
                       image: FileImage(File(imagen)),
@@ -205,29 +206,27 @@ class CardAnimal extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: SizeConfig.blockSizeHorizontal! * 5,
-                    vertical: SizeConfig.blockSizeHorizontal! * 5,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        titulo,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: SizeConfig.blockSizeHorizontal! * 4,
-                        ),
+                Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      titulo,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: SizeConfig.blockSizeHorizontal! * 4,
                       ),
-                      Text(
-                        fecha.substring(0, 10),
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeHorizontal! * 3.6,
-                        ),
+                    ),
+                    Text(
+                      fecha.substring(0, 10),
+                      style: TextStyle(
+                        fontSize: SizeConfig.blockSizeHorizontal! * 3.6,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 )
               ],
             ),
